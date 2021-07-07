@@ -44,7 +44,7 @@ jobs:
           set(GIT_REVISION_MAJOR ${ecal_version_array[0]}   PARENT_SCOPE)    
           set(GIT_REVISION_MAYOR ${ecal_version_array[0]}   PARENT_SCOPE)
           set(GIT_REVISION_MINOR ${ecal_version_array[1]}   PARENT_SCOPE)
-          set(GIT_REVISION_PATCH ${ecal_version_array[2]}  PARENT_SCOPE)
+          set(GIT_REVISION_PATCH \"${ecal_version_array[2]}\"  PARENT_SCOPE)
           set(GIT_DESCRIBE_TAG   \"$git_version_complete\"      PARENT_SCOPE)
           set(GIT_REVISION_DATE  \"$git_commit_date\" PARENT_SCOPE)
           set(eCAL_BUILD_DATE    \"$git_commit_date\" PARENT_SCOPE)
