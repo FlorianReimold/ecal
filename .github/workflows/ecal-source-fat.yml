@@ -27,7 +27,7 @@ jobs:
         --exclude="*.git" \
         --stats \
         $GITHUB_WORKSPACE/ \
-        ${{ runner.workspace }}/cleaned/ \
+        ${{ runner.workspace }}/cleaned/ecal/ \
 
     - name: Create fat archive
       working-directory: ${{ runner.workspace }}/cleaned/
