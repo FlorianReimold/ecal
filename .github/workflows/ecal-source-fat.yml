@@ -38,13 +38,24 @@ jobs:
         IFS='.'
         read -a ecal_version_array <<< "${git_version_complete:1}"
         
+        export ecal_version_major=${ecal_version_array[0]}
+        export ecal_version_minor=${ecal_version_array[1]}
+        
+        # Remove -nightly or +nightly etc.
+        IFS='-'
+        read -a ecal_patch_array <<< "${ecal_version_array[2]}"
+        IFS='+'
+        read -a ecal_patch_array <<< "${ecal_patch_array[0]}"
+        
+        export ecal_version_patch="${ecal_patch_array[0]}"
+        
         cd ${{ runner.workspace }}/cleaned/ecal/thirdparty/cmake_functions/git/
         echo "
         function (git_revision_information)
-          set(GIT_REVISION_MAJOR ${ecal_version_array[0]}   PARENT_SCOPE)    
-          set(GIT_REVISION_MAYOR ${ecal_version_array[0]}   PARENT_SCOPE)
-          set(GIT_REVISION_MINOR ${ecal_version_array[1]}   PARENT_SCOPE)
-          set(GIT_REVISION_PATCH \"${ecal_version_array[2]}\"  PARENT_SCOPE)
+          set(GIT_REVISION_MAJOR ${ecal_version_major}   PARENT_SCOPE)    
+          set(GIT_REVISION_MAYOR ${ecal_version_major}   PARENT_SCOPE)
+          set(GIT_REVISION_MINOR ${ecal_version_minor}   PARENT_SCOPE)
+          set(GIT_REVISION_PATCH ${ecal_version_patch}  PARENT_SCOPE)
           set(GIT_DESCRIBE_TAG   \"$git_version_complete\"      PARENT_SCOPE)
           set(GIT_REVISION_DATE  \"$git_commit_date\" PARENT_SCOPE)
           set(eCAL_BUILD_DATE    \"$git_commit_date\" PARENT_SCOPE)
