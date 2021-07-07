@@ -32,8 +32,10 @@ jobs:
     - name: Archive Action
       uses: ihiroky/archive-action@v1
       with:
-        root_dir: ${{ runner.workspace }}/cleaned/ecal/
-        file_path: ${{ runner.workspace }}/cleaned/ecal-source-fat.tar.gz
+        base_dir: ${{ runner.workspace }}/cleaned/
+        root_dir: ecal/
+        file_path: ecal-source-fat.tar.gz
+
 
     - name: Upload source
       uses: actions/upload-artifact@v2
