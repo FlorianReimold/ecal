@@ -41,4 +41,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ecal-source-fat.zip
-        path: ${{ runner.workspace }}/cleaned/ecal/ecal-source-fat.zip
+        path: ${{ runner.workspace }}/cleaned/ecal-source-fat.zip
