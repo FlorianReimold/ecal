@@ -29,16 +29,13 @@ jobs:
         $GITHUB_WORKSPACE \
         ${{ runner.workspace }}/cleaned/ecal \
 
-    - name: Archive Action
-      uses: ihiroky/archive-action@v1
-      with:
-        base_dir: ${{ runner.workspace }}/cleaned/
-        root_dir: ecal/
-        file_path: ecal-source-fat.tar.gz
-
+    - name: Create fat archive
+      working-directory: ${{ runner.workspace }}/cleaned/
+      run: tar -czvf ${{ runner.workspace }}/cleaned/ecal-fat-source.tar.gz ecal
+      shell: bash
 
     - name: Upload source
       uses: actions/upload-artifact@v2
       with:
         name: ecal-source-fat
-        path: ${{ runner.workspace }}/cleaned/ecal-source-fat.tar.gz
+        path: ${{ runner.workspace }}/cleaned/ecal-fat-source.tar.gz
