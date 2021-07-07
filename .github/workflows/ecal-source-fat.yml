@@ -29,6 +29,28 @@ jobs:
         $GITHUB_WORKSPACE/ \
         ${{ runner.workspace }}/cleaned/ecal/ \
 
+    - name: Patch git-get-revision-information.cmake
+      shell: bash
+      run: |
+        cd $GITHUB_WORKSPACE
+        export git_commit_date=$(git show -s --format=%ci)
+        export git_version_complete=$(git describe --tags --dirty)
+        IFS='.'
+        read -a ecal_version_array <<< "${git_version_complete:1}"
+        
+        cd ${{ runner.workspace }}/cleaned/ecal/thirdparty/cmake_functions/git/
+        echo "
+        function (git_revision_information)
+          set(GIT_REVISION_MAJOR ${ecal_version_array[0]}   PARENT_SCOPE)    
+          set(GIT_REVISION_MAYOR ${ecal_version_array[0]}   PARENT_SCOPE)
+          set(GIT_REVISION_MINOR ${ecal_version_array[1]}   PARENT_SCOPE)
+          set(GIT_REVISION_PATCH ${ecal_version_array[2]}  PARENT_SCOPE)
+          set(GIT_DESCRIBE_TAG   \"$git_version_complete\"      PARENT_SCOPE)
+          set(GIT_REVISION_DATE  \"$git_commit_date\" PARENT_SCOPE)
+          set(eCAL_BUILD_DATE    \"$git_commit_date\" PARENT_SCOPE)
+        endfunction (git_revision_information)
+        " > "git_revision_information.cmake"
+        
     - name: Create fat archive
       working-directory: ${{ runner.workspace }}/cleaned/
       run: tar -czvf ${{ runner.workspace }}/cleaned/ecal-fat-source.tar.gz ecal
