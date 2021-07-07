@@ -27,11 +27,11 @@ jobs:
         --exclude="*.git" \
         --stats \
         $GITHUB_WORKSPACE/ecal \
-        ${{ runner.workspace }}/cleaned/ecal \
+        ${{ runner.workspace }}/cleaned/ \
 
     - name: Create fat archive
-      working-directory: ${{ runner.workspace }}/cleaned/
-      run: tar -czvf ${{ runner.workspace }}/cleaned/ecal-fat-source.tar.gz ecal
+      working-directory: ${{ runner.workspace }}/cleaned/ecal
+      run: tar -czvf ${{ runner.workspace }}/cleaned/ecal-fat-source.tar.gz
       shell: bash
 
     - name: Upload source
