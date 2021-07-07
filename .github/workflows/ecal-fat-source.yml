@@ -70,5 +70,5 @@ jobs:
     - name: Upload source
       uses: actions/upload-artifact@v2
       with:
-        name: ecal-source-fat
+        name: ecal-fat-source
         path: ${{ runner.workspace }}/cleaned/ecal-fat-source.tar.gz
