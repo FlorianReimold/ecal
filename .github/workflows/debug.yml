@@ -1,0 +1,28 @@
+name: Debug GitHub Action
+
+on: 
+    push:
+
+jobs:
+    debug:
+        runs-on: ubuntu-latest
+
+        steps:
+
+        - name: Display GitHub Action parameters
+          run: |
+                echo "GITHUB_REF: ${{ github.ref }}"
+                echo "GITHUB_SHA: ${{ github.sha }}"
+                echo "GITHUB_REPOSITORY: ${{ github.repository }}"
+                echo "GITHUB_ACTOR: ${{ github.actor }}"
+                echo "GITHUB_WORKFLOW: ${{ github.workflow }}"
+                echo "GITHUB_HEAD_REF: ${{ github.head_ref }}"
+                echo "GITHUB_BASE_REF: ${{ github.base_ref }}"
+                echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
+                echo "GITHUB_WORKSPACE: ${{ github.workspace }}"
+                echo "GITHUB_ACTION: ${{ github.action }}"
+                echo "GITHUB_EVENT_PATH: ${{ github.event_path }}"
+                echo "RUNNER_OS: ${{ runner.os }}"
+                echo "RUNNER_TOOL_CACHE: ${{ runner.tool_cache }}"
+                echo "RUNNER_TEMP: ${{ runner.temp }}"
+                echo "RUNNER_WORKSPACE: ${{ runner.workspace }}"
