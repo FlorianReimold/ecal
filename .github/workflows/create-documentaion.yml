@@ -1,17 +1,17 @@
-name: Documentation build
+name: Documentation
 
 on:  
   push:
-    branches:
-      - support/v5.13
-  release:
-    types:
-      - released
-      - unpublished
-      - deleted
+    # branches:
+    #   - support/v5.13
+  # release:
+  #   types:
+  #     - released
+  #     - unpublished
+  #     - deleted
 
 jobs:
-  documentation-build:
+  documentation:
     runs-on: ubuntu-latest
 
     steps:
@@ -93,3 +93,4 @@ jobs:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
+        destination_dir: v5.13
