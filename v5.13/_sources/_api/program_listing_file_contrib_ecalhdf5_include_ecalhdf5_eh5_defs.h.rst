@@ -12,7 +12,7 @@ Program Listing for File eh5_defs.h
 
    ;/* ========================= eCAL LICENSE =================================
    ; *
-   ; * Copyright (C) 2016 - 2019 Continental Corporation
+   ; * Copyright (C) 2016 - 2024 Continental Corporation
    ; *
    ; * Licensed under the Apache License, Version 2.0 (the "License");
    ; * you may not use this file except in compliance with the License.
@@ -33,13 +33,13 @@ Program Listing for File eh5_defs.h
    #pragma once
    
    ;/* version parsed out into numeric values */
-   #define ECAL_HDF5_VERSION_MAJOR              2                   
-   #define ECAL_HDF5_VERSION_MINOR              1                   
+   #define ECAL_HDF5_VERSION_MAJOR              3                   
+   #define ECAL_HDF5_VERSION_MINOR              0                   
    #define ECAL_HDF5_VERSION_PATCH              0                   
    
    ;/* version as string */
-   #define ECAL_HDF5_VERSION                    "v.2.1.0.20180329"  
-   #define ECAL_HDF5_DATE                       "29.03.2018"        
+   #define ECAL_HDF5_VERSION                    "v.3.0.0.20241203"  
+   #define ECAL_HDF5_DATE                       "03.12.2024"        
    
    ;/* name as string */
    #define ECAL_HDF5_NAME                       "eCALHDF5"          

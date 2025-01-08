@@ -5,7 +5,7 @@ File ecal_server.h
 ==================
 
 
-eCAL service interface 
+eCAL server interface 
 
 
 
@@ -38,11 +38,11 @@ Includes
 
 - ``ecal/ecal_service_info.h`` (:ref:`file_ecal_core_include_ecal_ecal_service_info.h`)
 
+- ``ecal/ecal_types.h`` (:ref:`file_ecal_core_include_ecal_ecal_types.h`)
+
 - ``memory``
 
 - ``string``
-
-- ``vector``
 
 
 
@@ -51,8 +51,6 @@ Included By
 
 
 - :ref:`file_ecal_core_include_ecal_ecal.h`
-
-- :ref:`file_ecal_core_include_ecal_ecal_service.h`
 
 
 
@@ -63,10 +61,12 @@ Namespaces
 
 - :ref:`namespace_eCAL`
 
+- :ref:`namespace_eCAL__v6`
+
 
 Classes
 -------
 
 
-- :ref:`exhale_class_classeCAL_1_1CServiceServer`
+- :ref:`exhale_class_classeCAL_1_1v6_1_1CServiceServer`
 

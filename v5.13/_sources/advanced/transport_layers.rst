@@ -14,7 +14,7 @@ eCAL distinguished between three types of communication:
 - **Interhost Communication**: communication between publishers / subscribers that are located on different hosts, inside a network
 
 .. note::
-   Per default, interhost communication is turned off by configuration. To configure this you need to set the ecal.ini [network/network_enabled] parameter to true (network communication mode) or false (local host only communication mode)
+   Per default, interhost communication is turned off by configuration. To configure this you need to set the ecal.yaml [network/network_enabled] parameter to true (network communication mode) or false (local host only communication mode)
    
 In general the latency of the data transport increases depending on the "distance" of the communication participants.
 The "closer" the participants, the "quicker" the transport.
@@ -35,8 +35,6 @@ Most of them can be configured additionally.
 +----------------------------------------------+--------------------------+--------------------+-------------------------------------------------------------------------------------------+
 | Layer                                        | ini parameter            | Physical Layer     | Comment                                                                                   |
 +==============================================+==========================+====================+===========================================================================================+
-| :ref:`inproc <transport_layer_inproc>`       | [publisher/use_inproc]   | inner process      | inner process, zeroy copy communication (pointer forwarding)                              |
-+----------------------------------------------+--------------------------+--------------------+-------------------------------------------------------------------------------------------+
 | :ref:`shm <transport_layer_shm>`             | [publisher/use_shm]      | shared memory      | interprocess, shared memory communication, supports N:M connections, 2 memory copies      |
 +----------------------------------------------+--------------------------+--------------------+-------------------------------------------------------------------------------------------+
 | :ref:`udp_mc <transport_layer_udp_mc>`       | [publisher/use_udp_mc]   | udp multicast      | interhost, topic name based dynamic multicast grouping to optimize pub/sub socket payload |
@@ -50,15 +48,15 @@ Default transport layers
 Not all transport layers may be used for all communication scenarios, e.g. it's not possible to use shared memory transport on interhost communication.
 eCAL provides sensible default transport methods, depending on the type of communication taking place.
 
-+-----------------------------+------------+-----------+------------+------------+
-| Header 1                    | inproc     | shm       | udp_mc     | tcp        |
-+=============================+============+===========+============+============+
-| Intraprocess Communication  | available  | default   | available  | available  |
-+-----------------------------+------------+-----------+------------+------------+
-| Interprocess Communication  |            | default   | available  | available  |
-+-----------------------------+------------+-----------+------------+------------+
-| Interhost Communication     |            |           | default    | available  |
-+-----------------------------+------------+-----------+------------+------------+
++-----------------------------+-----------+------------+------------+
+| Header 1                    | shm       | udp_mc     | tcp        |
++=============================+===========+============+============+
+| Intraprocess Communication  | default   | available  | available  |
++-----------------------------+-----------+------------+------------+
+| Interprocess Communication  | default   | available  | available  |
++-----------------------------+-----------+------------+------------+
+| Interhost Communication     |           | default    | available  |
++-----------------------------+-----------+------------+------------+
 
 
 Configuration of transport layers
@@ -67,25 +65,23 @@ Configuration of transport layers
 In case the default configuration is not sensible enough, the eCAL user can finetune the configuration.
 The layers can be set up
 
-- for a whole machine using the central configuration file (ecal.ini) 
+- for a whole machine using the central configuration file (ecal.yaml) 
 - for a single eCAL process passed by command line arguments 
 - for a single publish-subscribe connection using the C++ or python publisher API.
 
-Every layer can set up in 3 different activation modes. Every mode can be configured as default in the ecal.ini file and can be overwritten by the C++/Python publisher API. This is the activation logic
+Every layer can set up in 3 different activation modes. Every mode can be configured as default in the ecal.yaml file and can be overwritten by the C++/Python publisher API. This is the activation logic
 
 - off: layer is switched off
 - on: layer is always switched on (i.e. payload will be send no matter if there is any local or network subscription)
 - auto: layer will be switched on automatically
 
-  - inproc = 2 : layer used automatically for inner process subscribers
   - shm = 2 : layer used automatically for inter process subscribers
   - udp_mc = 2 : layer used automatically for inter host (network) subscribers
 
 Independent from this publisher setting you can switch on/off the receiving (subscription) logic for every layer.
 That means you can prevent incoming payload on specific layers.
-This can be done in the ecal.ini file [network] section.
+This can be done in the ecal.yaml file [network] section.
 
-- inproc_rec_enabled = true / false : enable / disable inner process subscriptions
 - shm_rec_enabled = true / false : enable / disable inter process subscriptions
 - udp_mc_rec_enabled = true / false : enable / disable inter host subscriptions
 
@@ -97,4 +93,3 @@ This can be done in the ecal.ini file [network] section.
       layers/shm.rst
       layers/udp_mc.rst
       layers/tcp.rst
-      layers/inproc.rst

@@ -12,7 +12,7 @@ Program Listing for File ecal_client.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2019 Continental Corporation
+    * Copyright (C) 2016 - 2024 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -33,60 +33,66 @@ Program Listing for File ecal_client.h
    
    #include <ecal/ecal_deprecate.h>
    #include <ecal/ecal_os.h>
-   #include <ecal/ecal_callback.h>
-   #include <ecal/ecal_service_info.h>
    
-   #include <iostream>
+   #include <ecal/ecal_callback.h>
+   #include <ecal/ecal_client_instance.h>
+   #include <ecal/ecal_service_info.h>
+   #include <ecal/ecal_types.h>
+   
+   #include <memory>
    #include <string>
    #include <vector>
-   #include <memory>
    
    namespace eCAL
    {
      class CServiceClientImpl;
    
-     class CServiceClient
+     inline namespace v6
      {
-     public:
-       ECAL_API CServiceClient();
+       class ECAL_API_CLASS CServiceClient
+       {
+       public:
+         ECAL_API_EXPORTED_MEMBER
+           CServiceClient(const std::string& service_name_, const ServiceMethodInformationMapT method_information_map_ = ServiceMethodInformationMapT(), const ClientEventIDCallbackT event_callback_ = ClientEventIDCallbackT());
    
-       ECAL_API CServiceClient(const std::string& service_name_);
+         ECAL_API_EXPORTED_MEMBER
+           virtual ~CServiceClient();
    
-       ECAL_API virtual ~CServiceClient();
+         CServiceClient(const CServiceClient&) = delete;
+         
+         CServiceClient& operator=(const CServiceClient&) = delete;
    
-       ECAL_API CServiceClient(const CServiceClient&) = delete;
+         ECAL_API_EXPORTED_MEMBER
+           CServiceClient(CServiceClient&& rhs) noexcept;
    
-       ECAL_API CServiceClient& operator=(const CServiceClient&) = delete;
+         ECAL_API_EXPORTED_MEMBER
+           CServiceClient& operator=(CServiceClient&& rhs) noexcept;
    
-       ECAL_API bool Create(const std::string& service_name_);
+         ECAL_API_EXPORTED_MEMBER
+           std::vector<CClientInstance> GetClientInstances() const;
    
-       ECAL_API bool Destroy();
+         ECAL_API_EXPORTED_MEMBER
+           bool CallWithResponse(const std::string& method_name_, const std::string& request_, int timeout_, ServiceResponseVecT& service_response_vec_) const;
    
-       ECAL_API bool SetHostName(const std::string& host_name_);
+         ECAL_API_EXPORTED_MEMBER
+           bool CallWithCallback(const std::string& method_name_, const std::string& request_, int timeout_, const ResponseIDCallbackT& response_callback_) const;
    
-       ECAL_API bool Call(const std::string& method_name_, const std::string& request_, int timeout_ = -1);
+         ECAL_API_EXPORTED_MEMBER
+           bool CallWithCallbackAsync(const std::string& method_name_, const std::string& request_, const ResponseIDCallbackT& response_callback_) const;
    
-       ECAL_API bool Call(const std::string& method_name_, const std::string& request_, int timeout_, ServiceResponseVecT* service_response_vec_);
+         ECAL_API_EXPORTED_MEMBER
+           std::string GetServiceName() const;
    
-       ECAL_DEPRECATE_SINCE_5_10("Please use the create method bool Call(const std::string& method_name_, const std::string& request_, int timeout_, ServiceResponseVecT* service_response_vec_) instead. This function will be removed in future eCAL versions.")
-       ECAL_API bool Call(const std::string& host_name_, const std::string& method_name_, const std::string& request_, struct SServiceResponse& service_info_, std::string& response_);
+         // TODO: Implement this
    
-       ECAL_API bool CallAsync(const std::string& method_name_, const std::string& request_, int timeout_ = -1);
+         ECAL_API_EXPORTED_MEMBER
+           Registration::SServiceMethodId GetServiceId() const;
    
-       ECAL_API bool AddResponseCallback(const ResponseCallbackT& callback_);
+         ECAL_API_EXPORTED_MEMBER
+           bool IsConnected() const;
    
-       ECAL_API bool RemResponseCallback();
-   
-       ECAL_API bool AddEventCallback(eCAL_Client_Event type_, ClientEventCallbackT callback_);
-   
-       ECAL_API bool RemEventCallback(eCAL_Client_Event type_);
-   
-       ECAL_API std::string GetServiceName();
-   
-       ECAL_API bool IsConnected();
-   
-     protected:
-       std::shared_ptr<eCAL::CServiceClientImpl> m_service_client_impl;
-       bool                m_created;
-     };
+       private:
+         std::shared_ptr<eCAL::CServiceClientImpl> m_service_client_impl;
+       };
+     }
    }

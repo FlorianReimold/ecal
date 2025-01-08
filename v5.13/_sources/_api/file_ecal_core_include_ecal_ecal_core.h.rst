@@ -30,9 +30,13 @@ Includes
 --------
 
 
+- ``ecal/config/configuration.h``
+
 - ``ecal/ecal_init.h`` (:ref:`file_ecal_core_include_ecal_ecal_init.h`)
 
 - ``ecal/ecal_os.h`` (:ref:`file_ecal_core_include_ecal_ecal_os.h`)
+
+- ``ecal/ecal_types.h`` (:ref:`file_ecal_core_include_ecal_ecal_types.h`)
 
 - ``string``
 
@@ -62,21 +66,23 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_ecal__core_8h_1a1b9442b23e7971df6f41cf76a405933d`
+- :ref:`exhale_function_ecal__core_8h_1a6342e514137136747e6339844b25e432`
 
-- :ref:`exhale_function_ecal__core_8h_1aaf5f98fd50238b9b05a20ad01427fafe`
+- :ref:`exhale_function_ecal__core_8h_1a023307ac7027db8288093a3fc11d15e9`
 
-- :ref:`exhale_function_ecal__core_8h_1a2c697209aea93f6da6b5e6d8ed029cf0`
+- :ref:`exhale_function_ecal__core_8h_1a3ba629552c97fe1a7fe08846a2941f6e`
 
-- :ref:`exhale_function_ecal__core_8h_1ad7f1c501927aab247aa68a73580db191`
+- :ref:`exhale_function_ecal__core_8h_1a0b257fe51d5220b61b3e6db582804412`
 
-- :ref:`exhale_function_ecal__core_8h_1a390408819d676df7778dc77934dcd7eb`
+- :ref:`exhale_function_ecal__core_8h_1a30834f2dd3dbab8e0734c79b2aaf9bb4`
 
-- :ref:`exhale_function_ecal__core_8h_1a80530ef61fc0a320348cb17b9b55aa0f`
+- :ref:`exhale_function_ecal__core_8h_1af8f14107926964a1ab750dab13634b39`
 
-- :ref:`exhale_function_ecal__core_8h_1a8dbe319c04fef61bc7a5f6382fbe4c2f`
+- :ref:`exhale_function_ecal__core_8h_1a439b87d67679bce153704bc95d4b30de`
+
+- :ref:`exhale_function_ecal__core_8h_1a043fea4cd0b2793a63c1de5830bf382c`
 
 - :ref:`exhale_function_ecal__core_8h_1a600033b0736069b66b026b5bc39cab35`
 
-- :ref:`exhale_function_ecal__core_8h_1ab7ca5b4f6fe59075ea6136f998f24fac`
+- :ref:`exhale_function_ecal__core_8h_1a198ffb431748b7238f128aeabcc126f8`
 

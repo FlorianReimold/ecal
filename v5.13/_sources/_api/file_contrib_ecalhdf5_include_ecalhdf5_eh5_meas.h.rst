@@ -30,6 +30,12 @@ Includes
 --------
 
 
+- ``cstdint``
+
+- ``eh5_meas_api_v2.h`` (:ref:`file_contrib_ecalhdf5_include_ecalhdf5_eh5_meas_api_v2.h`)
+
+- ``eh5_meas_api_v3.h`` (:ref:`file_contrib_ecalhdf5_include_ecalhdf5_eh5_meas_api_v3.h`)
+
 - ``eh5_types.h`` (:ref:`file_contrib_ecalhdf5_include_ecalhdf5_eh5_types.h`)
 
 - ``functional``
@@ -45,18 +51,9 @@ Includes
 
 
 
-Namespaces
-----------
-
-
-- :ref:`namespace_eCAL`
-
-- :ref:`namespace_eCAL__eh5`
-
-
-Classes
+Defines
 -------
 
 
-- :ref:`exhale_class_classeCAL_1_1eh5_1_1HDF5Meas`
+- :ref:`exhale_define_eh5__meas_8h_1ae803c5567ff361b9f9ac4c52ddb59869`
 
