@@ -12,7 +12,7 @@ Program Listing for File ecal_os.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -55,44 +55,34 @@ Program Listing for File ecal_os.h
    #endif
    
    #ifdef _MSC_VER
-     #ifdef ECAL_CORE_EXPORTS
-       #define ECAL_API __declspec(dllexport)
-     #elif defined(ECAL_CORE_IMPORTS)
-       #define ECAL_API __declspec(dllimport)
-     #else 
-       #define ECAL_API
-     #endif
-   
-     #define ECAL_API_CLASS
-     #define ECAL_API_EXPORTED_MEMBER ECAL_API
-   
-     #ifdef ECAL_CORE_C_EXPORTS
+     #ifdef eCAL_EXPORTS
        #define ECALC_API __declspec(dllexport)
-       #define ECALC_API_DEPRECATED __declspec(dllexport deprecated)
-     #elif defined(ECAL_CORE_C_IMPORTS)
+     #else /* eCAL_EXPORTS */
        #define ECALC_API __declspec(dllimport)
-       #define ECALC_API_DEPRECATED __declspec(dllimport deprecated)
-     #else 
-       #define ECALC_API
-       #define ECALC_API_DEPRECATED __declspec(deprecated)
-     #endif
-   
-   
-   #else /* _MSC_VER */
-     #define ECAL_API_CLASS __attribute__((visibility("default")))
-     #ifdef ECAL_CORE_EXPORTS 
-       #define ECAL_API __attribute__((visibility("default")))
-     #else
+     #endif /* eCAL_EXPORTS */
+     #ifdef ECAL_C_DLL
        #define ECAL_API
-     #endif
+     #else /* ECAL_C_DLL */
+       #define ECAL_API ECALC_API
+     #endif /* ECAL_C_DLL */
+   #else /* _MSC_VER */
+     #define ECALC_API
+     #define ECAL_API
+   #endif
    
-     #define ECAL_API_CLASS __attribute__((visibility("default")))
-     #define ECAL_API_EXPORTED_MEMBER 
-   
-     #ifdef ECAL_CORE_C_EXPORTS 
-       #define ECALC_API __attribute__((visibility("default")))
+   #if !defined(ECALC_NO_DEPRECATION_WARNINGS)
+     #ifdef _MSC_VER
+       #ifdef eCAL_EXPORTS
+         #define ECALC_API_DEPRECATED __declspec(dllexport deprecated)
+       #else /* eCAL_EXPORTS */
+         #define ECALC_API_DEPRECATED __declspec(dllimport deprecated)
+       #endif /* eCAL_EXPORTS */
+     #elif defined(__GNUC__) || defined(__clang__)
+       #define ECALC_API_DEPRECATED __attribute__((deprecated))
      #else
-       #define ECALC_API
+       #pragma message("WARNING: You need to implement DEPRECATED for this compiler")
+       #define ECALC_API_DEPRECATED
      #endif
-     #define ECALC_API_DEPRECATED __attribute__((deprecated)) ECALC_API 
+   #else
+     #define ECALC_API_DEPRECATED ECALC_API
    #endif

@@ -12,7 +12,7 @@ Program Listing for File ecal_log.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -33,19 +33,36 @@ Program Listing for File ecal_log.h
    
    #include <ecal/ecal_os.h>
    #include <ecal/ecal_log_level.h>
-   #include <ecal/types/logging.h>
+   #include <ecal/ecal_deprecate.h>
    
-   #include <list>
    #include <string>
    
    namespace eCAL
    {  
      namespace Logging
      {
-       ECAL_API void Log(eCAL_Logging_eLogLevel level_, const std::string& msg_);
+       ECAL_API void SetLogLevel(eCAL_Logging_eLogLevel level_);
+     
+       ECAL_API eCAL_Logging_eLogLevel GetLogLevel();
    
-       ECAL_API bool GetLogging(std::string& log_);
+       ECAL_API void Log(const std::string& msg_);
    
-       ECAL_API bool GetLogging(Logging::SLogging& log_);
+       inline void Log(eCAL_Logging_eLogLevel level_, const std::string& msg_)
+       {
+         SetLogLevel(level_);
+         Log(msg_);
+       }
+   
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API void StartCoreTimer();
+   
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API void StopCoreTimer();
+   
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API void SetCoreTime(double time_);
+   
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API double GetCoreTime();
      }
    }

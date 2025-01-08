@@ -12,7 +12,7 @@ Program Listing for File ecal_core.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -38,29 +38,24 @@ Program Listing for File ecal_core.h
    #include <utility>
    
    #include <ecal/ecal_os.h>
-   #include <ecal/config/configuration.h>
-   #include <ecal/ecal_types.h>
    
    namespace eCAL
    {
-     ECAL_API std::string GetVersionString();
+     ECAL_API const char* GetVersionString();
    
-     ECAL_API std::string GetVersionDateString();
+     ECAL_API const char* GetVersionDateString();
    
-     ECAL_API SVersion GetVersion();
+     ECAL_API int GetVersion(int* major_, int* minor_, int* patch_);
    
-     ECAL_API bool Initialize(const std::string& unit_name_ = "", unsigned int components_ = Init::Default);
+     ECAL_API int Initialize(int argc_ = 0, char **argv_ = nullptr, const char *unit_name_ = nullptr, unsigned int components_ = Init::Default);
    
-     ECAL_API bool Initialize(eCAL::Configuration& config_, const std::string& unit_name_ = "", unsigned int components_ = Init::Default);
+     ECAL_API int Initialize(std::vector<std::string> args_, const char *unit_name_ = nullptr, unsigned int components_ = Init::Default);
    
-     ECAL_API bool Finalize();
+     ECAL_API int Finalize(unsigned int components_ = Init::Default);
    
-     ECAL_API bool IsInitialized();
+     ECAL_API int IsInitialized(unsigned int component_ = 0);
    
-     ECAL_API bool IsInitialized(unsigned int component_);
-   
-   
-     ECAL_API bool SetUnitName(const std::string& unit_name_);
+     ECAL_API int SetUnitName(const char *unit_name_);
    
      ECAL_API bool Ok();
    }

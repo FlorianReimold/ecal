@@ -12,7 +12,7 @@ Program Listing for File ecal_deprecate.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -36,8 +36,33 @@ Program Listing for File ecal_deprecate.h
    //uncomment this line if you do want to get deprecation warnings inside eCAL core
    //#undef ECAL_NO_DEPRECATION_WARNINGS
    
-   #if !defined(ECAL_NO_DEPRECATION_WARNINGS) && ECAL_VERSION_INTEGER >= ECAL_VERSION_CALCULATE(6, 0, 0)
-   #define ECAL_DEPRECATE_SINCE_6_0(__message__) [[deprecated(__message__)]] 
+   #if !defined(ECAL_NO_DEPRECATION_WARNINGS) && ECAL_VERSION_INTEGER >= ECAL_VERSION_CALCULATE(5, 4, 0)
+   #define ECAL_DEPRECATE_SINCE_5_4(__message__) [[deprecated(__message__)]] 
    #else 
-   #define ECAL_DEPRECATE_SINCE_6_0(__message__)                             
+   #define ECAL_DEPRECATE_SINCE_5_4(__message__)                             
+   #endif
+   
+   
+   #if !defined(ECAL_NO_DEPRECATION_WARNINGS) && ECAL_VERSION_INTEGER >= ECAL_VERSION_CALCULATE(5, 10, 0)
+   #define ECAL_DEPRECATE_SINCE_5_10(__message__) [[deprecated(__message__)]] 
+   #else 
+   #define ECAL_DEPRECATE_SINCE_5_10(__message__)                             
+   #endif
+   
+   #if !defined(ECAL_NO_DEPRECATION_WARNINGS) && ECAL_VERSION_INTEGER >= ECAL_VERSION_CALCULATE(5, 11, 0)
+   #define ECAL_DEPRECATE_SINCE_5_11(__message__) [[deprecated(__message__)]] 
+   #else 
+   #define ECAL_DEPRECATE_SINCE_5_11(__message__)                             
+   #endif
+   
+   #if !defined(ECAL_NO_DEPRECATION_WARNINGS) && ECAL_VERSION_INTEGER >= ECAL_VERSION_CALCULATE(5, 12, 0)
+   #define ECAL_DEPRECATE_SINCE_5_12(__message__) [[deprecated(__message__)]] 
+   #else 
+   #define ECAL_DEPRECATE_SINCE_5_12(__message__)                             
+   #endif
+   
+   #if !defined(ECAL_NO_DEPRECATION_WARNINGS) && ECAL_VERSION_INTEGER >= ECAL_VERSION_CALCULATE(5, 13, 0)
+   #define ECAL_DEPRECATE_SINCE_5_13(__message__) [[deprecated(__message__)]] 
+   #else 
+   #define ECAL_DEPRECATE_SINCE_5_13(__message__)                             
    #endif

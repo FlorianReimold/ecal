@@ -12,7 +12,7 @@ Program Listing for File ecal_publisher.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -31,70 +31,159 @@ Program Listing for File ecal_publisher.h
    
    #pragma once
    
+   #include <cstddef>
+   #include <ecal/ecal_callback.h>
    #include <ecal/ecal_deprecate.h>
    #include <ecal/ecal_os.h>
-   
-   #include <ecal/ecal_callback.h>
-   #include <ecal/ecal_config.h>
    #include <ecal/ecal_payload_writer.h>
+   #include <ecal/ecal_qos.h>
+   #include <ecal/ecal_tlayer.h>
    #include <ecal/ecal_types.h>
    
+   #include <chrono>
    #include <memory>
    #include <string>
    
    namespace eCAL
    {
-     class CPublisherImpl;
+     class CDataWriter;
    
-     inline namespace v6
+     class CPublisher
      {
-       class ECAL_API_CLASS CPublisher
+     public:
+   
+       ECAL_API static constexpr long long DEFAULT_TIME_ARGUMENT        = -1;  
+       ECAL_API static constexpr long long DEFAULT_ACKNOWLEDGE_ARGUMENT = -1;  
+       ECAL_API CPublisher();
+   
+       ECAL_DEPRECATE_SINCE_5_13("Please use the constructor CPublisher(const std::string& topic_name_, const SDataTypeInformation& topic_info_) instead. This function will be removed in future eCAL versions.")
+       ECAL_API CPublisher(const std::string& topic_name_, const std::string& topic_type_, const std::string& topic_desc_ = "");
+   
+       ECAL_API CPublisher(const std::string& topic_name_, const SDataTypeInformation& topic_info_);
+   
+       ECAL_API CPublisher(const std::string& topic_name_);
+   
+       ECAL_API virtual ~CPublisher();
+   
+       ECAL_API CPublisher(const CPublisher&) = delete;
+   
+       ECAL_API CPublisher& operator=(const CPublisher&) = delete;
+   
+       ECAL_API CPublisher(CPublisher&& rhs) noexcept;
+   
+       ECAL_API CPublisher& operator=(CPublisher&& rhs) noexcept;
+   
+       ECAL_DEPRECATE_SINCE_5_13("Please use the create method bool Create(const std::string& topic_name_, const SDataTypeInformation& topic_info_) instead. This function will be removed in future eCAL versions.")
+       ECAL_API bool Create(const std::string& topic_name_, const std::string& topic_type_, const std::string& topic_desc_ = "");
+   
+       ECAL_API bool Create(const std::string& topic_name_, const SDataTypeInformation& topic_info_);
+   
+       ECAL_API bool Create(const std::string& topic_name_)
        {
-       public:
-         ECAL_API_EXPORTED_MEMBER
-           static constexpr long long DEFAULT_TIME_ARGUMENT = -1;  
-         ECAL_API_EXPORTED_MEMBER
-           CPublisher(const std::string& topic_name_, const SDataTypeInformation& data_type_info_ = SDataTypeInformation(), const Publisher::Configuration& config_ = GetPublisherConfiguration());
+         return Create(topic_name_, SDataTypeInformation());
+       }
    
-         ECAL_API_EXPORTED_MEMBER
-           CPublisher(const std::string& topic_name_, const SDataTypeInformation& data_type_info_, const PubEventIDCallbackT event_callback_, const Publisher::Configuration& config_ = GetPublisherConfiguration());
+       ECAL_API bool Destroy();
    
-         ECAL_API_EXPORTED_MEMBER
-           virtual ~CPublisher();
+       ECAL_DEPRECATE_SINCE_5_13("Please use the method bool SetDataTypeInformation(const SDataTypeInformation& topic_info_) instead. This function will be removed in future eCAL versions.")
+       ECAL_API bool SetTypeName(const std::string& topic_type_name_);
    
-         CPublisher(const CPublisher&) = delete;
+       ECAL_DEPRECATE_SINCE_5_13("Please use the method bool SetDataTypeInformation(const SDataTypeInformation& topic_info_) instead. This function will be removed in future eCAL versions.")
+       ECAL_API bool SetDescription(const std::string& topic_desc_);
    
-         CPublisher& operator=(const CPublisher&) = delete;
+       ECAL_API bool SetDataTypeInformation(const SDataTypeInformation& topic_info_);
    
-         ECAL_API_EXPORTED_MEMBER
-           CPublisher(CPublisher&& rhs) noexcept;
+       ECAL_API bool SetAttribute(const std::string& attr_name_, const std::string& attr_value_);
    
-         ECAL_API_EXPORTED_MEMBER
-           CPublisher& operator=(CPublisher&& rhs) noexcept;
+       ECAL_API bool ClearAttribute(const std::string& attr_name_);
    
-         ECAL_API_EXPORTED_MEMBER
-           bool Send(const void* buf_, size_t len_, long long time_ = DEFAULT_TIME_ARGUMENT);
+       ECAL_API bool ShareType(bool state_ = true);
    
-         ECAL_API_EXPORTED_MEMBER
-           bool Send(CPayloadWriter& payload_, long long time_ = DEFAULT_TIME_ARGUMENT);
+       ECAL_API bool ShareDescription(bool state_ = true);
    
-         ECAL_API_EXPORTED_MEMBER
-           bool Send(const std::string& payload_, long long time_ = DEFAULT_TIME_ARGUMENT);
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API bool SetQOS(const QOS::SWriterQOS& qos_);
    
-         ECAL_API_EXPORTED_MEMBER
-           size_t GetSubscriberCount() const;
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API QOS::SWriterQOS GetQOS();
    
-         ECAL_API_EXPORTED_MEMBER
-           std::string GetTopicName() const;
+       ECAL_API bool SetLayerMode(TLayer::eTransportLayer layer_, TLayer::eSendMode mode_);
    
-         ECAL_API_EXPORTED_MEMBER
-           Registration::STopicId GetTopicId() const;
+       ECAL_DEPRECATE_SINCE_5_13("Will be removed in future eCAL versions.")
+       ECAL_API bool SetMaxBandwidthUDP(long bandwidth_);
    
-         ECAL_API_EXPORTED_MEMBER
-           SDataTypeInformation GetDataTypeInformation() const;
+       ECAL_API bool ShmSetBufferCount(long buffering_);
    
-       private:
-         std::shared_ptr<CPublisherImpl> m_publisher_impl;
-       };
-     }
+       ECAL_API bool ShmEnableZeroCopy(bool state_);
+   
+       ECAL_API bool ShmSetAcknowledgeTimeout(long long acknowledge_timeout_ms_);
+   
+       template <typename Rep, typename Period>
+       bool ShmSetAcknowledgeTimeout(std::chrono::duration<Rep, Period> acknowledge_timeout_)
+       {
+         auto acknowledge_timeout_ms = std::chrono::duration_cast<std::chrono::milliseconds>(acknowledge_timeout_).count();
+         return ShmSetAcknowledgeTimeout(static_cast<long long>(acknowledge_timeout_ms));
+       }
+   
+       ECAL_API bool SetID(long long id_);
+   
+       ECAL_API size_t Send(const void* buf_, size_t len_, long long time_ = DEFAULT_TIME_ARGUMENT) const;
+   
+       ECAL_API size_t Send(CPayloadWriter& payload_, long long time_ = DEFAULT_TIME_ARGUMENT) const;
+   
+       ECAL_API size_t Send(const void* buf_, size_t len_, long long time_, long long acknowledge_timeout_ms_) const;
+   
+       ECAL_DEPRECATE_SINCE_5_12("Please use the method size_t Send(CPayloadWriter& payload_, long long time_, long long acknowledge_timeout_ms_) const instead. This function will be removed in future eCAL versions.")
+       ECAL_API size_t SendSynchronized(const void* const buf_, size_t len_, long long time_, long long acknowledge_timeout_ms_) const
+       {
+         return Send(buf_, len_, time_, acknowledge_timeout_ms_);
+       }
+   
+       ECAL_API size_t Send(CPayloadWriter& payload_, long long time_, long long acknowledge_timeout_ms_) const;
+   
+       ECAL_API size_t Send(const std::string& s_, long long time_ = DEFAULT_TIME_ARGUMENT) const
+       {
+         return(Send(s_.data(), s_.size(), time_, DEFAULT_ACKNOWLEDGE_ARGUMENT));
+       }
+   
+       ECAL_API size_t Send(const std::string& s_, long long time_, long long acknowledge_timeout_ms_) const
+       {
+         return(Send(s_.data(), s_.size(), time_, acknowledge_timeout_ms_));
+       }
+   
+       ECAL_API bool AddEventCallback(eCAL_Publisher_Event type_, PubEventCallbackT callback_);
+   
+       ECAL_API bool RemEventCallback(eCAL_Publisher_Event type_);
+   
+       ECAL_API bool IsCreated() const {return(m_created);}
+   
+       ECAL_API bool IsSubscribed() const;
+   
+       ECAL_API size_t GetSubscriberCount() const;
+   
+       ECAL_API std::string GetTopicName() const;
+   
+       ECAL_DEPRECATE_SINCE_5_13("Please use the method SDataTypeInformation GetDataTypeInformation() instead. You can extract the typename from the SDataTypeInformation variable. This function will be removed in future eCAL versions.")
+       ECAL_API std::string GetTypeName() const;
+   
+       ECAL_DEPRECATE_SINCE_5_13("Please use the method SDataTypeInformation GetDataTypeInformation() instead. You can extract the descriptor from the SDataTypeInformation variable. This function will be removed in future eCAL versions.")
+       ECAL_API std::string GetDescription() const;
+   
+       ECAL_API SDataTypeInformation GetDataTypeInformation() const;
+   
+       ECAL_API std::string Dump(const std::string& indent_ = "") const;
+   
+     protected:
+       void InitializeQOS();
+       void InitializeTLayer();
+       bool ApplyTopicToDescGate(const std::string& topic_name_, const SDataTypeInformation& topic_info_);
+   
+       // class members
+       std::shared_ptr<CDataWriter>     m_datawriter;
+       struct ECAL_API QOS::SWriterQOS  m_qos;
+       struct ECAL_API TLayer::STLayer  m_tlayer;
+       long long                        m_id;
+       bool                             m_created;
+       bool                             m_initialized;
+     };
    }

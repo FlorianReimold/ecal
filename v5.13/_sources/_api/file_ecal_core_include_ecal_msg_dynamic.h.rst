@@ -30,15 +30,7 @@ Includes
 --------
 
 
-- ``ecal/ecal_subscriber_v5.h`` (:ref:`file_ecal_core_include_ecal_ecal_subscriber_v5.h`)
-
-- ``ecal/ecal_util.h`` (:ref:`file_ecal_core_include_ecal_ecal_util.h`)
-
 - ``exception``
-
-- ``mutex``
-
-- ``optional``
 
 - ``string``
 
@@ -52,11 +44,4 @@ Namespaces
 
 
 - :ref:`namespace_eCAL`
-
-
-Classes
--------
-
-
-- :ref:`exhale_class_classeCAL_1_1CDynamicMessageSubscriber`
 

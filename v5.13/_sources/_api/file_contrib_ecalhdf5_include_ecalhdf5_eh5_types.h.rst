@@ -46,10 +46,6 @@ Included By
 
 - :ref:`file_contrib_ecalhdf5_include_ecalhdf5_eh5_meas.h`
 
-- :ref:`file_contrib_ecalhdf5_include_ecalhdf5_eh5_meas_api_v2.h`
-
-- :ref:`file_contrib_ecalhdf5_include_ecalhdf5_eh5_meas_api_v3.h`
-
 
 
 

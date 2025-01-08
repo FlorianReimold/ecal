@@ -12,7 +12,7 @@ Program Listing for File ecal_callback.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -51,20 +51,40 @@ Program Listing for File ecal_callback.h
    
      struct SPubEventCallbackData
      {
-       eCAL_Publisher_Event type{pub_event_none};  
-       long long            time{0};               
-       long long            clock{0};              
-       std::string          tid;                   
-       SDataTypeInformation tdatatype;             
+       SPubEventCallbackData()
+       {
+         type  = pub_event_none;
+         time  = 0;
+         clock = 0;
+       };
+       eCAL_Publisher_Event type;        
+       long long            time;        
+       long long            clock;       
+       std::string          tid;         
+       ECAL_DEPRECATE_SINCE_5_13("Use the separate infos encoding and type in member tdatatype instead of ttype.")
+       std::string          ttype;       
+       ECAL_DEPRECATE_SINCE_5_13("Use the tdatatype.descriptor instead of tdesc.")
+       std::string          tdesc;       
+       SDataTypeInformation tdatatype;   
      };
    
      struct SSubEventCallbackData
      {
-       eCAL_Subscriber_Event type{sub_event_none}; 
-       long long             time{0};              
-       long long             clock{0};             
-       std::string           tid;                  
-       SDataTypeInformation  tdatatype;            
+       SSubEventCallbackData()
+       {
+         type  = sub_event_none;
+         time  = 0;
+         clock = 0;
+       };
+       eCAL_Subscriber_Event type;       
+       long long             time;       
+       long long             clock;      
+       std::string           tid;        
+       ECAL_DEPRECATE_SINCE_5_13("Use the separate infos encoding and type in member tdatatype instead of ttype.")
+       std::string           ttype;      
+       ECAL_DEPRECATE_SINCE_5_13("Use the tdatatype.descriptor instead of tdesc.")
+       std::string           tdesc;      
+       SDataTypeInformation  tdatatype;  
      };
    
      struct SServiceAttr
@@ -109,25 +129,17 @@ Program Listing for File ecal_callback.h
        long long         time = 0;                  
      };
    
-     using ReceiveCallbackT = std::function<void (const char* topic_name_, const struct SReceiveCallbackData* data_)>;
-   
-     using ReceiveIDCallbackT = std::function<void(const Registration::STopicId& topic_id_, const SDataTypeInformation& data_type_info_, const SReceiveCallbackData& data_)>;
+     using ReceiveCallbackT = std::function<void (const char *, const struct SReceiveCallbackData *)>;
    
      using TimerCallbackT = std::function<void ()>;
    
-     using PubEventCallbackT = std::function<void (const char* topic_name_, const struct SPubEventCallbackData* data_)>;
+     using RegistrationCallbackT = std::function<void (const char *, int)>;
    
-     using PubEventIDCallbackT = std::function<void(const Registration::STopicId& topic_id_, const struct SPubEventCallbackData& data_)>;
+     using PubEventCallbackT = std::function<void (const char *, const struct SPubEventCallbackData *)>;
    
-     using SubEventCallbackT = std::function<void (const char* topic_name_, const struct SSubEventCallbackData* data_)>;
+     using SubEventCallbackT = std::function<void (const char *, const struct SSubEventCallbackData *)>;
    
-     using SubEventIDCallbackT = std::function<void(const Registration::STopicId& topic_id_, const struct SSubEventCallbackData& data_)>;
+     using ClientEventCallbackT = std::function<void (const char *, const struct SClientEventCallbackData *)>;
    
-     using ClientEventCallbackT = std::function<void (const char* service_name_, const struct SClientEventCallbackData* data_)>;
-   
-     using ClientEventIDCallbackT = std::function<void(const Registration::SServiceMethodId& service_id_, const struct SClientEventCallbackData& data_)>;
-   
-     using ServerEventCallbackT = std::function<void (const char* service_name_, const struct SServerEventCallbackData* data_)>;
-   
-     using ServerEventIDCallbackT = std::function<void(const Registration::SServiceMethodId& service_id_, const struct SServerEventCallbackData& data_)>;
+     using ServerEventCallbackT = std::function<void (const char *, const struct SServerEventCallbackData *)>;
    }

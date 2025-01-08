@@ -12,7 +12,7 @@ Program Listing for File ecal_types.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -31,133 +31,55 @@ Program Listing for File ecal_types.h
    
    #pragma once
    #include <string>
-   #include <tuple>
-   #include <iostream>
    
    namespace eCAL
    {
-     struct SVersion
-     {
-       const int major; 
-       const int minor; 
-       const int patch; 
-     };
-   
-     struct SDataTypeInformation
-     {
-       std::string name;          
-       std::string encoding;      
-       std::string descriptor;    
-   
-       bool operator==(const SDataTypeInformation& other) const
+       struct SDataTypeInformation
        {
-         return name == other.name && encoding == other.encoding && descriptor == other.descriptor;
-       }
+         std::string name;          
+         std::string encoding;      
+         std::string descriptor;    
    
-       bool operator!=(const SDataTypeInformation& other) const
-       {
-         return !(*this == other);
-       }
-   
-       bool operator<(const SDataTypeInformation& rhs) const
-       {
-           return std::tie(name, encoding, descriptor) < std::tie(rhs.name, rhs.encoding, rhs.descriptor);
-       }
-   
-       void clear()
-       {
-         name.clear();
-         encoding.clear();
-         descriptor.clear();
-       }
-     };
-   
-     struct SServiceMethodInformation
-     {
-       SDataTypeInformation request_type;   
-       SDataTypeInformation response_type;  
-   
-       bool operator==(const SServiceMethodInformation& other) const
-       {
-         return request_type == other.request_type && response_type == other.response_type;
-       }
-   
-       bool operator!=(const SServiceMethodInformation& other) const
-       {
-         return !(*this == other);
-       }
-   
-       bool operator<(const SServiceMethodInformation& rhs) const
-       {
-         return std::tie(request_type, response_type) < std::tie(rhs.request_type, rhs.response_type);
-       }
-     };
-   
-     namespace Registration
-     {
-       struct SEntityId
-       {
-         std::string  entity_id;         // unique id within that process (it should already be unique within the whole system)
-         int32_t      process_id = 0;    // process id which produced the sample
-         std::string  host_name;         // host which produced the sample
-   
-         bool operator==(const SEntityId& other) const {
-           return entity_id == other.entity_id;
+         bool operator==(const SDataTypeInformation& other) const
+         {
+           return name == other.name && encoding == other.encoding && descriptor == other.descriptor;
          }
    
-         bool operator<(const SEntityId& other) const
+         bool operator!=(const SDataTypeInformation& other) const
          {
-           return entity_id < other.entity_id;
+           return !(*this == other);
          }
        };
    
-       // Overload the << operator for SEntityId
-       inline std::ostream& operator<<(std::ostream& os, const SEntityId& id)
+       struct STopicInformation
        {
-         os << "SEntityId(entity_id: " << id.entity_id
-           << ", process_id: " << id.process_id
-           << ", host_name: " << id.host_name << ")";
-         return os;
-       }
+         SDataTypeInformation topic_type; 
    
-       struct STopicId
-       {
-         SEntityId    topic_id;
-         std::string  topic_name;
-   
-         bool operator==(const STopicId& other) const
+         bool operator==(const STopicInformation& other) const
          {
-           return topic_id == other.topic_id && topic_name == other.topic_name;
+           return topic_type == other.topic_type;
          }
    
-         bool operator<(const STopicId& other) const
+         bool operator!=(const STopicInformation& other) const
          {
-           return std::tie(topic_id, topic_name) < std::tie(other.topic_id, other.topic_name);
+           return !(*this == other);
          }
        };
    
-       inline std::ostream& operator<<(std::ostream& os, const STopicId& id)
+       struct SServiceMethodInformation
        {
-         os << "STopicId(topic_id: " << id.topic_id
-           << ", topic_name: " << id.topic_name << ")";
-         return os;
-       }
+         SDataTypeInformation request_type;   
+         SDataTypeInformation response_type;  
    
-       struct SServiceMethodId
-       {
-         SEntityId    service_id;
-         std::string  service_name;
-         std::string  method_name;
-   
-         bool operator==(const SServiceMethodId& other) const
+         bool operator==(const SServiceMethodInformation& other) const
          {
-           return service_id == other.service_id && service_name == other.service_name && method_name == other.method_name;
+           return request_type == other.request_type && response_type == other.response_type;
          }
    
-         bool operator<(const SServiceMethodId& other) const
+         bool operator!=(const SServiceMethodInformation& other) const
          {
-           return std::tie(service_id, service_name, method_name) < std::tie(other.service_id, other.service_name, other.method_name);
+           return !(*this == other);
          }
        };
-     }
+   
    }

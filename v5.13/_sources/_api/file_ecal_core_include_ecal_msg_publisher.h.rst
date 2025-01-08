@@ -25,19 +25,19 @@ Includes
 --------
 
 
-- ``cassert``
-
-- ``cstring``
+- ``assert.h``
 
 - ``ecal/ecal_deprecate.h`` (:ref:`file_ecal_core_include_ecal_ecal_deprecate.h`)
 
-- ``ecal/ecal_publisher_v5.h`` (:ref:`file_ecal_core_include_ecal_ecal_publisher_v5.h`)
+- ``ecal/ecal_publisher.h`` (:ref:`file_ecal_core_include_ecal_ecal_publisher.h`)
 
 - ``ecal/ecal_util.h`` (:ref:`file_ecal_core_include_ecal_ecal_util.h`)
 
 - ``functional``
 
 - ``string``
+
+- ``string.h``
 
 - ``vector``
 

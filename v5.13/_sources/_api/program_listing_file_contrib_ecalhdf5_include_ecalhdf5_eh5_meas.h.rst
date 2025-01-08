@@ -12,7 +12,7 @@ Program Listing for File eh5_meas.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ Program Listing for File eh5_meas.h
    
    #pragma once
    
-   #include <cstdint>
    #include <functional>
    #include <set>
    #include <string>
@@ -39,11 +38,79 @@ Program Listing for File eh5_meas.h
    
    #include "eh5_types.h"
    
-   #if defined(ECAL_EH5_NO_DEPRECATION_WARNINGS)
-   #define ECAL_EH5_DEPRECATE(__message__)                             
-   #else 
-   #define ECAL_EH5_DEPRECATE(__message__) [[deprecated(__message__)]] 
-   #endif
+   namespace eCAL
+   {
+     namespace eh5
+     {
+       class HDF5MeasImpl;
    
-   #include "eh5_meas_api_v2.h"
-   #include "eh5_meas_api_v3.h"
+       class HDF5Meas
+       {
+       public:
+         HDF5Meas();
+   
+         explicit HDF5Meas(const std::string& path, eAccessType access = RDONLY);
+   
+         ~HDF5Meas();
+   
+         HDF5Meas(const HDF5Meas& other) = delete;
+         HDF5Meas& operator=(const HDF5Meas& other) = delete;
+   
+         HDF5Meas(HDF5Meas&&) = default;
+         HDF5Meas& operator=(HDF5Meas&&) = default;
+   
+         bool Open(const std::string& path, eAccessType access = RDONLY);
+   
+         bool Close();
+   
+         bool IsOk() const;
+   
+         std::string GetFileVersion() const;
+   
+         size_t GetMaxSizePerFile() const;
+   
+         void SetMaxSizePerFile(size_t size);
+   
+         bool IsOneFilePerChannelEnabled() const;
+   
+         void SetOneFilePerChannelEnabled(bool enabled);
+   
+         std::set<std::string> GetChannelNames() const;
+   
+         bool HasChannel(const std::string& channel_name) const;
+   
+         std::string GetChannelDescription(const std::string& channel_name) const;
+   
+         void SetChannelDescription(const std::string& channel_name, const std::string& description);
+   
+         std::string GetChannelType(const std::string& channel_name) const;
+   
+         void SetChannelType(const std::string& channel_name, const std::string& type);
+   
+         long long GetMinTimestamp(const std::string& channel_name) const;
+   
+         long long GetMaxTimestamp(const std::string& channel_name) const;
+   
+         bool GetEntriesInfo(const std::string& channel_name, EntryInfoSet& entries) const;
+   
+         bool GetEntriesInfoRange(const std::string& channel_name, long long begin, long long end, EntryInfoSet& entries) const;
+   
+         bool GetEntryDataSize(long long entry_id, size_t& size) const;
+   
+         bool GetEntryData(long long entry_id, void* data) const;
+   
+         void SetFileBaseName(const std::string& base_name);
+   
+         bool AddEntryToFile(const void* data, const unsigned long long& size, const long long& snd_timestamp, const long long& rcv_timestamp, const std::string& channel_name, long long id, long long clock);
+   
+         typedef std::function<void(void)> CallbackFunction;
+   
+         void ConnectPreSplitCallback(CallbackFunction cb);
+   
+         void DisconnectPreSplitCallback();
+   
+        private:
+         std::unique_ptr<HDF5MeasImpl> hdf_meas_impl_;
+       };
+     }  // namespace eh5
+   }  // namespace eCAL

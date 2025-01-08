@@ -12,7 +12,7 @@ Program Listing for File ecal_service_info.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -32,12 +32,10 @@ Program Listing for File ecal_service_info.h
    #pragma once
    
    #include <ecal/cimpl/ecal_service_info_cimpl.h>
-   #include <ecal/ecal_types.h>
    
    #include <functional>
    #include <string>
    #include <vector>
-   #include <map>
    
    namespace eCAL
    {
@@ -57,13 +55,9 @@ Program Listing for File ecal_service_info.h
        eCallState   call_state;     
        std::string  response;       
      };
-     using ServiceResponseVecT = std::vector<SServiceResponse>; 
+     typedef std::vector<SServiceResponse> ServiceResponseVecT; 
    
-     using MethodCallbackT = std::function<int(const std::string& method_, const std::string& req_type_, const std::string& resp_type_, const std::string& request_, std::string& response_)>;
+     typedef std::function<int(const std::string& method_, const std::string& req_type_, const std::string& resp_type_, const std::string& request_, std::string& response_)> MethodCallbackT;
    
-     using ResponseCallbackT = std::function<void(const struct SServiceResponse& service_response_)>;
-   
-     using ResponseIDCallbackT = std::function<void (const Registration::SEntityId& entity_id_, const struct SServiceResponse& service_response_)>;
-   
-     using ServiceMethodInformationMapT = std::map<std::string, SServiceMethodInformation>;
+     typedef std::function<void(const struct SServiceResponse& service_response_)> ResponseCallbackT;
    }

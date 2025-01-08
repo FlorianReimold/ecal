@@ -12,7 +12,7 @@ Program Listing for File ecal.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2024 Continental Corporation
+    * Copyright (C) 2016 - 2019 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -38,11 +38,12 @@ Program Listing for File ecal.h
    #include <ecal/ecal_client.h>
    #include <ecal/ecal_config.h>
    #include <ecal/ecal_core.h>
+   #include <ecal/ecal_event.h>
    #include <ecal/ecal_log.h>
    #include <ecal/ecal_process.h>
    #include <ecal/ecal_monitoring.h>
    #include <ecal/ecal_publisher.h>
-   #include <ecal/ecal_registration.h>
+   #include <ecal/ecal_qos.h>
    #include <ecal/ecal_server.h>
    #include <ecal/ecal_service_info.h>
    #include <ecal/ecal_subscriber.h>
@@ -50,4 +51,13 @@ Program Listing for File ecal.h
    #include <ecal/ecal_timer.h>
    #include <ecal/ecal_tlayer.h>
    #include <ecal/ecal_util.h>
-   #include <ecal/config/configuration.h>
+   
+   /* Legacy namespace to be compatible with eCAL < 4.9 code, will be removed in future eCAL versions*/
+   namespace eCAL
+   {
+     namespace pb
+     { 
+     }
+   }
+   namespace eCALPB = eCAL::pb;
+   
