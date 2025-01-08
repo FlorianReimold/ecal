@@ -25,7 +25,7 @@ jobs:
       with:
         submodules:  'true'
         fetch-depth: 0
-        
+    
     - name: Install Python requirements
       shell: bash
       run: |
@@ -92,4 +92,4 @@ jobs:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
-        destination_dir: v5.13
+        destination_dir: latest

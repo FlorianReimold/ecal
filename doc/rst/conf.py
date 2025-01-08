@@ -214,7 +214,7 @@ html_theme_options = {
     # Add version switcher to choose between different versions of the documentation
     "switcher": {
         "json_url": "https://florianreimold.github.io/ecal/switcher.json",
-        "version_match": "master",
+        "version_match": "latest",
     },
 
      # Set to check_switcher false to allow offline builds
@@ -223,7 +223,7 @@ html_theme_options = {
 
 html_sidebars = {
     # Add the version switchter to the sidebar
-    "**": ["navbar-logo", "icon-links", "version-switcher", "sbt-sidebar-nav.html"]
+    "**": ["navbar-logo", "icon-links", "version-switcher", "search-field", "sbt-sidebar-nav.html"]
 }
 
 # -- Options for HTMLHelp output ---------------------------------------------
