@@ -32,7 +32,11 @@ Includes
 
 - ``ecal/cimpl/ecal_service_info_cimpl.h``
 
+- ``ecal/ecal_types.h`` (:ref:`file_ecal_core_include_ecal_ecal_types.h`)
+
 - ``functional``
+
+- ``map``
 
 - ``string``
 
@@ -48,7 +52,13 @@ Included By
 
 - :ref:`file_ecal_core_include_ecal_ecal_client.h`
 
+- :ref:`file_ecal_core_include_ecal_ecal_client_instance.h`
+
+- :ref:`file_ecal_core_include_ecal_ecal_client_v5.h`
+
 - :ref:`file_ecal_core_include_ecal_ecal_server.h`
+
+- :ref:`file_ecal_core_include_ecal_ecal_server_v5.h`
 
 
 
@@ -71,9 +81,13 @@ Typedefs
 --------
 
 
-- :ref:`exhale_typedef_ecal__service__info_8h_1ae0436af7a525f2b5fcc30025def57c30`
+- :ref:`exhale_typedef_ecal__service__info_8h_1a085ef39b12d7ec954557c0543afb87c8`
 
-- :ref:`exhale_typedef_ecal__service__info_8h_1a572360f74991bd1369ea24b5b7a0b6bb`
+- :ref:`exhale_typedef_ecal__service__info_8h_1a2921beb7f71b3be1f5674f5b78d5caaf`
 
-- :ref:`exhale_typedef_ecal__service__info_8h_1a36106945ed691d2225be35b428072270`
+- :ref:`exhale_typedef_ecal__service__info_8h_1a299d1e6826eabb96a783cdbf9929371f`
+
+- :ref:`exhale_typedef_ecal__service__info_8h_1adcabd235781e8cb9b62e4e21df9206f0`
+
+- :ref:`exhale_typedef_ecal__service__info_8h_1a46b797741012d9431f54330dfbfd71f3`
 

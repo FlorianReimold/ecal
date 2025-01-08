@@ -34,19 +34,13 @@ Includes
 
 - ``ecal/cimpl/ecal_core_cimpl.h``
 
-- ``ecal/cimpl/ecal_event_cimpl.h``
-
 - ``ecal/cimpl/ecal_log_cimpl.h``
 
 - ``ecal/cimpl/ecal_monitoring_cimpl.h``
 
 - ``ecal/cimpl/ecal_process_cimpl.h``
 
-- ``ecal/cimpl/ecal_proto_dyn_json_subscriber_cimpl.h``
-
 - ``ecal/cimpl/ecal_publisher_cimpl.h``
-
-- ``ecal/cimpl/ecal_qos_cimpl.h``
 
 - ``ecal/cimpl/ecal_server_cimpl.h``
 
@@ -69,12 +63,6 @@ Includes
 - ``string.h``
 
 
-
-Included By
------------
-
-
-- :ref:`file_ecal_core_include_ecal_ecal_clang.h`
 
 
 

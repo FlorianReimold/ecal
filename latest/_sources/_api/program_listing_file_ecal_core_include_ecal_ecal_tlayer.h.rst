@@ -12,7 +12,7 @@ Program Listing for File ecal_tlayer.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2019 Continental Corporation
+    * Copyright (C) 2016 - 2024 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -43,31 +43,7 @@ Program Listing for File ecal_tlayer.h
          tlayer_udp_mc     = 1,
          tlayer_shm        = 4,
          tlayer_tcp        = 5,
-         tlayer_inproc     = 42,  
          tlayer_all        = 255
-       };
-   
-       enum eSendMode
-       {
-         smode_none = -1,
-         smode_off  = 0,
-         smode_on,
-         smode_auto
-       };
-   
-       struct ECAL_API STLayer
-       {
-         STLayer()
-         {
-           sm_udp_mc  = smode_none;
-           sm_shm     = smode_none;
-           sm_inproc  = smode_none;
-           sm_tcp     = smode_none;
-         }
-         eSendMode sm_udp_mc;  
-         eSendMode sm_shm;     
-         eSendMode sm_inproc;  
-         eSendMode sm_tcp;     
        };
      }
    }

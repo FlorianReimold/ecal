@@ -12,7 +12,7 @@ Program Listing for File ecal_server.h
 
    /* ========================= eCAL LICENSE =================================
     *
-    * Copyright (C) 2016 - 2019 Continental Corporation
+    * Copyright (C) 2016 - 2024 Continental Corporation
     *
     * Licensed under the Apache License, Version 2.0 (the "License");
     * you may not use this file except in compliance with the License.
@@ -33,50 +33,60 @@ Program Listing for File ecal_server.h
    
    #include <ecal/ecal_deprecate.h>
    #include <ecal/ecal_os.h>
+   
    #include <ecal/ecal_callback.h>
    #include <ecal/ecal_service_info.h>
+   #include <ecal/ecal_types.h>
    
-   #include <string>
-   #include <vector>
    #include <memory>
+   #include <string>
    
    namespace eCAL
    {
      class CServiceServerImpl;
    
-     class CServiceServer
+     inline namespace v6
      {
-     public:
-       ECAL_API CServiceServer();
+       class ECAL_API_CLASS CServiceServer
+       {
+       public:
+         ECAL_API_EXPORTED_MEMBER
+           explicit CServiceServer(const std::string& service_name_, const ServerEventIDCallbackT event_callback_ = ServerEventIDCallbackT());
    
-       ECAL_API CServiceServer(const std::string& service_name_);
+         ECAL_API_EXPORTED_MEMBER
+           virtual ~CServiceServer();
    
-       ECAL_API virtual ~CServiceServer();
+         CServiceServer(const CServiceServer&) = delete;
    
-       ECAL_API CServiceServer(const CServiceServer&) = delete;
+         CServiceServer& operator=(const CServiceServer&) = delete;
    
-       ECAL_API CServiceServer& operator=(const CServiceServer&) = delete;
+         ECAL_API_EXPORTED_MEMBER
+           CServiceServer(CServiceServer&& rhs) noexcept;
    
-       ECAL_API bool Create(const std::string& service_name_);
+         ECAL_API_EXPORTED_MEMBER
+           CServiceServer& operator=(CServiceServer&& rhs) noexcept;
    
-       ECAL_API bool Destroy();
+         // TODO: Provide new MethodCallbackT type using SServiceMethodInformation instead "MethodCallbackT = std::function<int(const std::string& method_, const std::string& req_type_, const std::string& resp_type_, const std::string& request_, std::string& response_)>"
    
-       ECAL_API bool AddDescription(const std::string& method_, const std::string& req_type_, const std::string& req_desc_, const std::string& resp_type_, const std::string& resp_desc_);
+         ECAL_API_EXPORTED_MEMBER
+           bool SetMethodCallback(const std::string& method_, const SServiceMethodInformation& method_info_, const MethodCallbackT& callback_);
    
-       ECAL_API bool AddMethodCallback(const std::string& method_, const std::string& req_type_, const std::string& resp_type_, const MethodCallbackT& callback_);
+         ECAL_API_EXPORTED_MEMBER
+           bool RemoveMethodCallback(const std::string& method_);
    
-       ECAL_API bool RemMethodCallback(const std::string& method_);
+         ECAL_API_EXPORTED_MEMBER
+           std::string GetServiceName();
    
-       ECAL_API bool AddEventCallback(eCAL_Server_Event type_, ServerEventCallbackT callback_);
+         // TODO: Implement this
    
-       ECAL_API bool RemEventCallback(eCAL_Server_Event type_);
+         ECAL_API_EXPORTED_MEMBER
+           Registration::SServiceMethodId GetServiceId() const;
    
-       ECAL_API std::string GetServiceName();
+         ECAL_API_EXPORTED_MEMBER
+           bool IsConnected();
    
-       ECAL_API bool IsConnected();
-   
-     private:
-       std::shared_ptr<CServiceServerImpl> m_service_server_impl;
-       bool                                m_created;
-     };
+       private:
+         std::shared_ptr<CServiceServerImpl> m_service_server_impl;
+       };
+     }
    } 

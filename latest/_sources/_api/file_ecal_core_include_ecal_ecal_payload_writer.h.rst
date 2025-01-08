@@ -40,6 +40,8 @@ Included By
 
 - :ref:`file_ecal_core_include_ecal_ecal_publisher.h`
 
+- :ref:`file_ecal_core_include_ecal_ecal_publisher_v5.h`
+
 
 
 

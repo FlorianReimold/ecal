@@ -32,13 +32,15 @@ Includes
 
 - ``ecal/ecal_callback.h`` (:ref:`file_ecal_core_include_ecal_ecal_callback.h`)
 
+- ``ecal/ecal_client_instance.h`` (:ref:`file_ecal_core_include_ecal_ecal_client_instance.h`)
+
 - ``ecal/ecal_deprecate.h`` (:ref:`file_ecal_core_include_ecal_ecal_deprecate.h`)
 
 - ``ecal/ecal_os.h`` (:ref:`file_ecal_core_include_ecal_ecal_os.h`)
 
 - ``ecal/ecal_service_info.h`` (:ref:`file_ecal_core_include_ecal_ecal_service_info.h`)
 
-- ``iostream``
+- ``ecal/ecal_types.h`` (:ref:`file_ecal_core_include_ecal_ecal_types.h`)
 
 - ``memory``
 
@@ -54,8 +56,6 @@ Included By
 
 - :ref:`file_ecal_core_include_ecal_ecal.h`
 
-- :ref:`file_ecal_core_include_ecal_ecal_service.h`
-
 
 
 
@@ -65,10 +65,12 @@ Namespaces
 
 - :ref:`namespace_eCAL`
 
+- :ref:`namespace_eCAL__v6`
+
 
 Classes
 -------
 
 
-- :ref:`exhale_class_classeCAL_1_1CServiceClient`
+- :ref:`exhale_class_classeCAL_1_1v6_1_1CServiceClient`
 
