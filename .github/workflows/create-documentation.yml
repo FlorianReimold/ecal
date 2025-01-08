@@ -1,14 +1,14 @@
-name: Documentation build
+name: Documentation
 
 on:  
   push:
-    branches:
-      - support/v5.13
-  release:
-    types:
-      - released
-      - unpublished
-      - deleted
+  #   branches:
+  #     - support/v5.13
+  # release:
+  #   types:
+  #     - released
+  #     - unpublished
+  #     - deleted
 
 jobs:
   documentation-build:
@@ -25,7 +25,6 @@ jobs:
       with:
         submodules:  'true'
         fetch-depth: 0
-        ref: 'support/v5.13'
         
     - name: Install Python requirements
       shell: bash

@@ -210,6 +210,20 @@ html_theme_options = {
     "extra_navbar": "", # => Remove the default text
     "footer_start": ["footer.html"],
     "extra_footer": '',
+
+    # Add version switcher to choose between different versions of the documentation
+    "switcher": {
+        "json_url": "https://florianreimold.github.io/ecal/switcher.json",
+        "version_match": "latest",
+    },
+
+     # Set to check_switcher false to allow offline builds
+    "check_switcher": False,
+}
+
+html_sidebars = {
+    # Add the version switchter to the sidebar
+    "**": ["navbar-logo", "icon-links", "version-switcher", "search-field", "sbt-sidebar-nav.html"]
 }
 
 # -- Options for HTMLHelp output ---------------------------------------------
