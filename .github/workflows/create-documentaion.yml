@@ -25,7 +25,6 @@ jobs:
       with:
         submodules:  'true'
         fetch-depth: 0
-        ref: 'support/v5.13'
         
     - name: Install Python requirements
       shell: bash
