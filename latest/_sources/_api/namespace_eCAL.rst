@@ -117,13 +117,13 @@ Functions
 
 - :ref:`exhale_function_ecal__core_8h_1a0b257fe51d5220b61b3e6db582804412`
 
-- :ref:`exhale_function_ecal__core_8h_1a30834f2dd3dbab8e0734c79b2aaf9bb4`
-
 - :ref:`exhale_function_ecal__core_8h_1af8f14107926964a1ab750dab13634b39`
 
-- :ref:`exhale_function_ecal__core_8h_1a439b87d67679bce153704bc95d4b30de`
+- :ref:`exhale_function_ecal__core_8h_1a30834f2dd3dbab8e0734c79b2aaf9bb4`
 
 - :ref:`exhale_function_ecal__core_8h_1a043fea4cd0b2793a63c1de5830bf382c`
+
+- :ref:`exhale_function_ecal__core_8h_1a439b87d67679bce153704bc95d4b30de`
 
 - :ref:`exhale_function_ecal__core_8h_1a600033b0736069b66b026b5bc39cab35`
 
