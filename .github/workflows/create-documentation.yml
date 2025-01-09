@@ -23,9 +23,11 @@ jobs:
         # if the branch is a support/ branch, then set the doc_version
         if [[ $branch == support/* ]]; then
           echo "doc_version=$(echo ${branch#support/})" >> $GITHUB_ENV
+          echo "publish_dir=$(echo ${branch#support/})" >> $GITHUB_ENV
           echo "publish_doc=true" >> $GITHUB_ENV
         elif [[ $branch == master ]]; then
           echo "doc_version=v999.0" >> $GITHUB_ENV
+          echo "publish_dir=latest" >> $GITHUB_ENV
           echo "publish_doc=true" >> $GITHUB_ENV
         else
           echo "publish_doc=false" >> $GITHUB_ENV
@@ -129,5 +131,5 @@ jobs:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
-        destination_dir: ${{ env.doc_version }}
+        destination_dir: ${{ env.publish_dir }}
       if: env.publish_doc == 'true'
