@@ -77,9 +77,9 @@ copyright = u'2023, Continental'
 #author = u'Continental'
 
 # The short X.Y version
-version = u''
+version = u'"v999.0"'
 # The full version, including alpha/beta/rc tags
-release = u''
+release = u'"v999.0"'
 
 
 # -- General configuration ---------------------------------------------------
@@ -214,7 +214,7 @@ html_theme_options = {
     # Add version switcher to choose between different versions of the documentation
     "switcher": {
         "json_url": "https://florianreimold.github.io/ecal/switcher.json",
-        "version_match": "v999.0.0", # Dummy version to satisfy semver
+        "version_match": "v999.0", # Dummy version to satisfy semver
     },
 
      # Set to check_switcher false to allow offline builds
