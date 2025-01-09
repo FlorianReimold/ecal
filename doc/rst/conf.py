@@ -242,7 +242,7 @@ html_theme_options = {
     # Add version switcher to choose between different versions of the documentation
     "switcher": {
         "json_url": "https://florianreimold.github.io/ecal/switcher.json",
-        "version_match": "5.12",
+        "version_match": "v5.12.0",
     },
 
      # Set to check_switcher false to allow offline builds
