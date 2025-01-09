@@ -87,7 +87,7 @@
 <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
       </ul><div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-primary btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        v5.12.0  <!-- this text may get changed later by javascript -->
+        v5.12  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -97,7 +97,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables _api/file_ecal_core_include_ecal_ecal_core.h and {'json_url': 'https://florianreimold.github.io/ecal/switcher.json', 'version_match': 'v5.12.0'}.
+     variables _api/file_ecal_core_include_ecal_ecal_core.h and {'json_url': 'https://florianreimold.github.io/ecal/switcher.json', 'version_match': 'v5.12'}.
 -->
 
 <script type="text/javascript">
@@ -148,10 +148,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's  variable.
+            // this version, rather than using sphinx's v5.12 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "v5.12.0") {
+            if (entry.version == "v5.12") {
                 node.classList.add("active");
                 let btn = document.getElementById("version_switcher_button");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
@@ -2635,8 +2635,8 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="function_ecal__core_8h_1aaf5f98fd50238b9b05a20ad01427fafe.html#exhale-function-ecal-core-8h-1aaf5f98fd50238b9b05a20ad01427fafe"><span class="std std-ref">Function eCAL::GetVersion</span></a></p></li>
 <li><p><a class="reference internal" href="function_ecal__core_8h_1ac52f8cc16ece6d66783726f78695ff87.html#exhale-function-ecal-core-8h-1ac52f8cc16ece6d66783726f78695ff87"><span class="std std-ref">Function eCAL::GetVersionDateString</span></a></p></li>
 <li><p><a class="reference internal" href="function_ecal__core_8h_1a714f5511a81c28caa345b820bad16bf1.html#exhale-function-ecal-core-8h-1a714f5511a81c28caa345b820bad16bf1"><span class="std std-ref">Function eCAL::GetVersionString</span></a></p></li>
-<li><p><a class="reference internal" href="function_ecal__core_8h_1a390408819d676df7778dc77934dcd7eb.html#exhale-function-ecal-core-8h-1a390408819d676df7778dc77934dcd7eb"><span class="std std-ref">Function eCAL::Initialize(int, char **, const char *, unsigned int)</span></a></p></li>
 <li><p><a class="reference internal" href="function_ecal__core_8h_1a80530ef61fc0a320348cb17b9b55aa0f.html#exhale-function-ecal-core-8h-1a80530ef61fc0a320348cb17b9b55aa0f"><span class="std std-ref">Function eCAL::Initialize(std::vector&lt;std::string&gt;, const char *, unsigned int)</span></a></p></li>
+<li><p><a class="reference internal" href="function_ecal__core_8h_1a390408819d676df7778dc77934dcd7eb.html#exhale-function-ecal-core-8h-1a390408819d676df7778dc77934dcd7eb"><span class="std std-ref">Function eCAL::Initialize(int, char **, const char *, unsigned int)</span></a></p></li>
 <li><p><a class="reference internal" href="function_ecal__core_8h_1a8dbe319c04fef61bc7a5f6382fbe4c2f.html#exhale-function-ecal-core-8h-1a8dbe319c04fef61bc7a5f6382fbe4c2f"><span class="std std-ref">Function eCAL::IsInitialized</span></a></p></li>
 <li><p><a class="reference internal" href="function_ecal__core_8h_1a600033b0736069b66b026b5bc39cab35.html#exhale-function-ecal-core-8h-1a600033b0736069b66b026b5bc39cab35"><span class="std std-ref">Function eCAL::Ok</span></a></p></li>
 <li><p><a class="reference internal" href="function_ecal__core_8h_1ab7ca5b4f6fe59075ea6136f998f24fac.html#exhale-function-ecal-core-8h-1ab7ca5b4f6fe59075ea6136f998f24fac"><span class="std std-ref">Function eCAL::SetUnitName</span></a></p></li>

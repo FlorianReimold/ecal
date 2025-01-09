@@ -87,7 +87,7 @@
 <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
       </ul><div class="dropdown" id="version_switcher">
     <button type="button" class="btn btn-primary btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
-        v5.12.0  <!-- this text may get changed later by javascript -->
+        v5.12  <!-- this text may get changed later by javascript -->
         <span class="caret"></span>
     </button>
     <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
@@ -97,7 +97,7 @@
 
 <!-- NOTE: this JS must live here (not in our global JS file) because it relies
      on being processed by Jinja before it is run (specifically for replacing
-     variables _api/file_contrib_ecaltime_include_dynamic_sleeper.h and {'json_url': 'https://florianreimold.github.io/ecal/switcher.json', 'version_match': 'v5.12.0'}.
+     variables _api/file_contrib_ecaltime_include_dynamic_sleeper.h and {'json_url': 'https://florianreimold.github.io/ecal/switcher.json', 'version_match': 'v5.12'}.
 -->
 
 <script type="text/javascript">
@@ -148,10 +148,10 @@ function checkPageExistsAndRedirect(event) {
 
             $("#version_switcher_menu").append(node);
             // replace dropdown button text with the preferred display name of
-            // this version, rather than using sphinx's  variable.
+            // this version, rather than using sphinx's v5.12 variable.
             // also highlight the dropdown entry for the currently-viewed
             // version's entry
-            if (entry.version == "v5.12.0") {
+            if (entry.version == "v5.12") {
                 node.classList.add("active");
                 let btn = document.getElementById("version_switcher_button");
                 btn.innerText = btn.dataset["activeVersionName"] = entry.name;
