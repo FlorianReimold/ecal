@@ -24,7 +24,7 @@ jobs:
           echo "doc_version=$(echo ${branch#support/})" >> $GITHUB_ENV
           echo "publish_doc=true" >> $GITHUB_ENV
         elif [[ $branch == master ]]; then
-          echo "doc_version=latest" >> $GITHUB_ENV
+          echo "doc_version=v999.0" >> $GITHUB_ENV
           echo "publish_doc=true" >> $GITHUB_ENV
         else
           echo "publish_doc=false" >> $GITHUB_ENV
