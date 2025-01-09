@@ -2,16 +2,16 @@
     {
         "name": "development",
         "version": "latest",
-        "url": "https://florianreimold.github.io/ecal/latest"
+        "url": "https://florianreimold.github.io/ecal/latest/"
     },
     {
         "name": "v5.13 (stable)",
         "version": "v5.13",
-        "url": "https://florianreimold.github.io/ecal/stable"
+        "url": "https://florianreimold.github.io/ecal/stable/"
     },
     {
         "name": "v5.12",
         "version": "v5.12",
-        "url": "https://florianreimold.github.io/ecal/v5.12"
+        "url": "https://florianreimold.github.io/ecal/v5.12/"
     }
 ]
