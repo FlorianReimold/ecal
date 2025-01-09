@@ -3,11 +3,34 @@ name: Documentation
 on:  
   push:
 
+  # release:
+  #   types:
+  #     - released
+  #     - unpublished
+  #     - deleted
+
 jobs:
   documentation-build:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Get current branch name
+      id: branch
+      run: |
+        # Get the branch name
+        branch=$(echo ${GITHUB_REF#refs/heads/})
+
+        # if the branch is a support/ branch, then set the doc_version
+        if [[ $branch == support/* ]]; then
+          echo "doc_version=$(echo ${branch#support/})" >> $GITHUB_ENV
+          echo "publish_doc=true" >> $GITHUB_ENV
+        elif [[ $branch == master ]]; then
+          echo "doc_version=v999.0" >> $GITHUB_ENV
+          echo "publish_doc=true" >> $GITHUB_ENV
+        else
+          echo "publish_doc=false" >> $GITHUB_ENV
+        fi
+
     - name: Install Dependencies
       run: |
         sudo apt update
@@ -79,10 +102,22 @@ jobs:
       run: cmake --build . --parallel --config Release --target documentation_sphinx
       working-directory: ${{ runner.workspace }}/_build
 
+    - name: Zip Documentation
+      run: |
+        cd ${{ runner.workspace }}/_build/doc/html
+        zip -r ${{ runner.workspace }}/_build/doc/html.zip .
+
+    - name: Upload Documentation as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation
+        path: ${{ runner.workspace }}/_build/doc/html.zip
+
     - name: Deploy Documentation
       uses: peaceiris/actions-gh-pages@v3
       with:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
-        destination_dir: v5.12
+        destination_dir: ${{ env.doc_version }}
+      if: env.publish_doc == 'true'
