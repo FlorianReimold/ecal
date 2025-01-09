@@ -77,10 +77,16 @@ copyright = u'2023, Continental'
 #author = u'Continental'
 
 # The short X.Y version
-version = u'v5.13'
+# version = u''
 # The full version, including alpha/beta/rc tags
-release = u'v5.13'
 
+# Get release version from ECAL_DOC_VERSION environment variable
+ecal_doc_version = os.getenv("ECAL_DOC_VERSION")
+
+if not ecal_doc_version:
+    ecal_doc_version = ""
+
+release = ecal_doc_version
 
 # -- General configuration ---------------------------------------------------
 
@@ -214,7 +220,7 @@ html_theme_options = {
     # Add version switcher to choose between different versions of the documentation
     "switcher": {
         "json_url": "https://florianreimold.github.io/ecal/switcher.json",
-        "version_match": "v5.13",
+        "version_match": ecal_doc_version,
     },
 
      # Set to check_switcher false to allow offline builds

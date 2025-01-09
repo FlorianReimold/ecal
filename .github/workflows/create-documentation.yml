@@ -2,19 +2,36 @@ name: Documentation
 
 on:  
   push:
-  #   branches:
-  #     - support/v5.13
+    # on push to master and support/* branches
+    branches:
+      - master
+      - support/*
   # release:
   #   types:
   #     - released
   #     - unpublished
   #     - deleted
-
 jobs:
   documentation-build:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Get current branch name
+      id: branch
+      run: |
+        # Get the branch name
+        branch=$(echo ${GITHUB_REF#refs/heads/})
+
+        # if the branch is a support/ branch, then set the doc_version
+        if [[ $branch == support/* ]]; then
+          echo "doc_version=$(echo ${branch#support/})" >> $GITHUB_ENV
+        else if [[ $branch == master ]]; then
+          echo "doc_version=latest" >> $GITHUB_ENV
+        else
+          echo "Error: Invalid branch"
+          exit 1
+        fi
+
     - name: Install Dependencies
       run: |
         sudo apt update
@@ -93,6 +110,7 @@ jobs:
     - name: Build Documentation
       env:
         ECAL_GH_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+        ECAL_DOC_VERSION: ${{ env.doc_version }}
       run: cmake --build . --parallel --config Release --target documentation_sphinx
       working-directory: ${{ runner.workspace }}/_build
 
@@ -102,4 +120,4 @@ jobs:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
-        destination_dir: v5.13
+        destination_dir: ${{ env.doc_version }}
