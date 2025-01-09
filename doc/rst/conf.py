@@ -219,6 +219,9 @@ html_theme_options = {
 
      # Set to check_switcher false to allow offline builds
     "check_switcher": False,
+
+    # Enable a banner telling the user that they look at an outdated version of the documentation
+    "show_version_warning_banner": True,
 }
 
 html_sidebars = {
