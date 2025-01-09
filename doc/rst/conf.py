@@ -238,6 +238,23 @@ html_theme_options = {
                                 '<p><a href="http://www.eclipse.org/legal">Legal</a></p>'
                             '</li>'
                         '</ul>',
+
+    # Add version switcher to choose between different versions of the documentation
+    "switcher": {
+        "json_url": "https://florianreimold.github.io/ecal/switcher.json",
+        "version_match": "5.13",
+    },
+
+     # Set to check_switcher false to allow offline builds
+    "check_switcher": False,
+
+    # Enable a banner telling the user that they look at an outdated version of the documentation
+    "announcement": "This is documentation for <strong> an old version</strong>.",
+}
+
+html_sidebars = {
+    # Add the version switchter to the sidebar
+    "**": ["navbar-logo", "icon-links", "version-switcher", "search-field", "sbt-sidebar-nav.html"]
 }
 
 # -- Options for HTMLHelp output ---------------------------------------------

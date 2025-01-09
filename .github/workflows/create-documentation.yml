@@ -1,14 +1,7 @@
-name: Documentation build
+name: Documentation
 
 on:  
   push:
-    branches:
-      - support/v5.13
-  release:
-    types:
-      - released
-      - unpublished
-      - deleted
 
 jobs:
   documentation-build:
@@ -21,11 +14,10 @@ jobs:
         sudo apt-get install ninja-build doxygen graphviz libprotobuf-dev libprotoc-dev protobuf-compiler libhdf5-dev
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         submodules:  'true'
         fetch-depth: 0
-        ref: 'support/v5.13'
         
     - name: Install Python requirements
       shell: bash
@@ -93,3 +85,4 @@ jobs:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
+        destination_dir: v5.12
