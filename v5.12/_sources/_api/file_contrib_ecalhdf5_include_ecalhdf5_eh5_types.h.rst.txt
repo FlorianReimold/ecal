@@ -30,8 +30,6 @@ Includes
 --------
 
 
-- ``ecal/measurement/base/types.h``
-
 - ``set``
 
 - ``string``
@@ -56,4 +54,20 @@ Namespaces
 - :ref:`namespace_eCAL`
 
 - :ref:`namespace_eCAL__eh5`
+
+
+Enums
+-----
+
+
+- :ref:`exhale_enum_eh5__types_8h_1a13c0abf99429bd61cb261ef77fea6223`
+
+
+Typedefs
+--------
+
+
+- :ref:`exhale_typedef_eh5__types_8h_1a5f6adce0368047b43ed15a4895cfcd59`
+
+- :ref:`exhale_typedef_eh5__types_8h_1a9cf1aca8ca7bda75ea5e1e529ee2edda`
 

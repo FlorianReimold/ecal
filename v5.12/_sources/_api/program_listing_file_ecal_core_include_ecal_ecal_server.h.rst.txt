@@ -38,45 +38,44 @@ Program Listing for File ecal_server.h
    
    #include <string>
    #include <vector>
-   #include <memory>
    
    namespace eCAL
    {
      class CServiceServerImpl;
    
-     class CServiceServer
+     class ECAL_API CServiceServer
      {
      public:
-       ECAL_API CServiceServer();
+       CServiceServer();
    
-       ECAL_API CServiceServer(const std::string& service_name_);
+       CServiceServer(const std::string& service_name_);
    
-       ECAL_API virtual ~CServiceServer();
+       virtual ~CServiceServer();
    
-       ECAL_API CServiceServer(const CServiceServer&) = delete;
+       CServiceServer(const CServiceServer&) = delete;
    
-       ECAL_API CServiceServer& operator=(const CServiceServer&) = delete;
+       CServiceServer& operator=(const CServiceServer&) = delete;
    
-       ECAL_API bool Create(const std::string& service_name_);
+       bool Create(const std::string& service_name_);
    
-       ECAL_API bool Destroy();
+       bool Destroy();
    
-       ECAL_API bool AddDescription(const std::string& method_, const std::string& req_type_, const std::string& req_desc_, const std::string& resp_type_, const std::string& resp_desc_);
+       bool AddDescription(const std::string& method_, const std::string& req_type_, const std::string& req_desc_, const std::string& resp_type_, const std::string& resp_desc_);
    
-       ECAL_API bool AddMethodCallback(const std::string& method_, const std::string& req_type_, const std::string& resp_type_, const MethodCallbackT& callback_);
+       bool AddMethodCallback(const std::string& method_, const std::string& req_type_, const std::string& resp_type_, const MethodCallbackT& callback_);
    
-       ECAL_API bool RemMethodCallback(const std::string& method_);
+       bool RemMethodCallback(const std::string& method_);
    
-       ECAL_API bool AddEventCallback(eCAL_Server_Event type_, ServerEventCallbackT callback_);
+       bool AddEventCallback(eCAL_Server_Event type_, ServerEventCallbackT callback_);
    
-       ECAL_API bool RemEventCallback(eCAL_Server_Event type_);
+       bool RemEventCallback(eCAL_Server_Event type_);
    
-       ECAL_API std::string GetServiceName();
+       std::string GetServiceName();
    
-       ECAL_API bool IsConnected();
+       bool IsConnected();
    
-     private:
-       std::shared_ptr<CServiceServerImpl> m_service_server_impl;
-       bool                                m_created;
+     protected:
+       CServiceServerImpl*  m_service_server_impl;
+       bool                 m_created;
      };
    } 

@@ -64,7 +64,7 @@
     <div class="visually-hidden">Toggle in-page Table of Contents</div>
 </label>
 <!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
+<div class="announcement header-item noprint">This is documentation for <strong> an old version</strong>.</div>
 <div class="header header-item noprint"></div>
 
     
@@ -78,18 +78,89 @@
 <!-- Sidebar -->
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
-      
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
-      
-      
-      <img src="../_static/ecal-logo.svg" class="logo" alt="logo">
-      
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+        <div class="bd-sidebar__top">
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/ecal-logo.svg" class="logo" alt="logo">
+</a>
+
+<ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul><div class="dropdown" id="version_switcher">
+    <button type="button" class="btn btn-primary btn-sm navbar-btn dropdown-toggle" id="version_switcher_button" data-toggle="dropdown">
+        5.13  <!-- this text may get changed later by javascript -->
+        <span class="caret"></span>
+    </button>
+    <div id="version_switcher_menu" class="dropdown-menu list-group-flush py-0" aria-labelledby="version_switcher_button">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+</div>
+
+<!-- NOTE: this JS must live here (not in our global JS file) because it relies
+     on being processed by Jinja before it is run (specifically for replacing
+     variables _download_archive/download_archive_ecal_5_9_7 and {'json_url': 'https://florianreimold.github.io/ecal/switcher.json', 'version_match': '5.13'}.
+-->
+
+<script type="text/javascript">
+// Check if corresponding page path exists in other version of docs
+// and, if so, go there instead of the homepage of the other docs version
+function checkPageExistsAndRedirect(event) {
+    const currentFilePath = "_download_archive/download_archive_ecal_5_9_7.html",
+          tryUrl = event.target.getAttribute("href");
+    let otherDocsHomepage = tryUrl.replace(currentFilePath, "");
+    $.ajax({
+        type: 'HEAD',
+        url: tryUrl,
+        // if the page exists, go there
+        success: function() {
+            location.href = tryUrl;
+        }
+    }).fail(function() {
+        location.href = otherDocsHomepage;
+    });
+    // this prevents the browser from following the href of the clicked node
+    // (which is fine because this function takes care of redirecting)
+    return false;
+}
+
+// Populate the version switcher from the JSON config file
+(function () {
+    $.getJSON("https://florianreimold.github.io/ecal/switcher.json", function(data, textStatus, jqXHR) {
+        const currentFilePath = "_download_archive/download_archive_ecal_5_9_7.html";
+        // create links to the corresponding page in the other docs versions
+        $.each(data, function(index, entry) {
+            // if no custom name specified (e.g., "latest"), use version string
+            if (!("name" in entry)) {
+                entry.name = entry.version;
+            }
+            // create the node
+            const node = document.createElement("a");
+            node.setAttribute("class", "list-group-item list-group-item-action py-1");
+            node.textContent = `${entry.name}`;
+            node.setAttribute("href", `${entry.url}${currentFilePath}`);
+            // on click, AJAX calls will check if the linked page exists before
+            // trying to redirect, and if not, will redirect to the homepage
+            // for that version of the docs.
+            node.onclick = checkPageExistsAndRedirect;
+            // Add dataset values for the version and name in case people want
+            // to apply CSS styling based on this information.
+            node.dataset["versionName"] = entry.name;
+            node.dataset["version"] = entry.version;
+
+            $("#version_switcher_menu").append(node);
+            // replace dropdown button text with the preferred display name of
+            // this version, rather than using sphinx's  variable.
+            // also highlight the dropdown entry for the currently-viewed
+            // version's entry
+            if (entry.version == "5.13") {
+                node.classList.add("active");
+                let btn = document.getElementById("version_switcher_button");
+                btn.innerText = btn.dataset["activeVersionName"] = entry.name;
+                btn.dataset["activeVersion"] = entry.version;
+            }
+        });
+    });
+})();
+</script><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
@@ -451,6 +522,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="../_api/enum_eh5__types_8h_1a13c0abf99429bd61cb261ef77fea6223.html">
+       Enum eAccessType
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="../_api/enum_ecal__qos_8h_1a0da8b6f992aeac2e25089144fd27da24.html">
        Enum eQOSPolicy_HistoryKind
       </a>
@@ -738,16 +814,6 @@
      <li class="toctree-l3">
       <a class="reference internal" href="../_api/function_ecal__config_8h_1af4eb2b0687288b44e2e363ab8b15a80b.html">
        Function eCAL::Config::IsNpcapEnabled
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../_api/function_ecal__config_8h_1a762bb5e7e8a645b38253789a6ffc98be.html">
-       Function eCAL::Config::IsServiceProtocolV0Enabled
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../_api/function_ecal__config_8h_1a2535368afdc3131762fe973a2469a836.html">
-       Function eCAL::Config::IsServiceProtocolV1Enabled
       </a>
      </li>
      <li class="toctree-l3">
@@ -1311,18 +1377,8 @@
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/function_ecal__clang_8h_1a796502f49ee481c4c6cb99bcb19db6d9.html">
-       Function ecal_getversion_components
-      </a>
-     </li>
-     <li class="toctree-l3">
       <a class="reference internal" href="../_api/function_ecal__clang_8h_1a29db94388ec381748e074a9df967909f.html">
        Function ecal_initialize
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../_api/function_ecal__clang_8h_1add52342efb58ef692522bdcd1ff2120f.html">
-       Function ecal_is_initialized
       </a>
      </li>
      <li class="toctree-l3">
@@ -1333,11 +1389,6 @@
      <li class="toctree-l3">
       <a class="reference internal" href="../_api/function_ecal__clang_8h_1a739ac14ab29959f162491b39ef6d9e39.html">
        Function ecal_set_process_state
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../_api/function_ecal__clang_8h_1afb64cdd0f3741ff9eeb55f62d3aba563.html">
-       Function ecal_set_unit_name
       </a>
      </li>
      <li class="toctree-l3">
@@ -1721,8 +1772,18 @@
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1ac7bddc5ffadba36ef41e7d5ff6c02d62.html">
+      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a5fa5b41873ca4d69095ec3bdfd84e8d9.html">
        Typedef eCAL::ClientEventCallbackT
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../_api/typedef_eh5__types_8h_1a5f6adce0368047b43ed15a4895cfcd59.html">
+       Typedef eCAL::EntryInfoSet
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../_api/typedef_eh5__types_8h_1a9cf1aca8ca7bda75ea5e1e529ee2edda.html">
+       Typedef eCAL::EntryInfoVect
       </a>
      </li>
      <li class="toctree-l3">
@@ -1731,17 +1792,17 @@
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1ad5ee2b03f650f613c9ae5487a73630a1.html">
+      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1abe3a31dd01a78ed20f8881be6a46dc4a.html">
        Typedef eCAL::PubEventCallbackT
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1aa7cd61c577b65761ec5227aa509f1aa6.html">
+      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a24e137588a5d25b62798efa64dfc8835.html">
        Typedef eCAL::ReceiveCallbackT
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a91d4259a2908bf409ff0b3fb871ca0a3.html">
+      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a6029e274ff176ebb67d94d03a8577b31.html">
        Typedef eCAL::RegistrationCallbackT
       </a>
      </li>
@@ -1751,7 +1812,7 @@
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a9b49337a63f0ad773c4490f21b7b8d5c.html">
+      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a4421750eb800d4ae997ed45622bece4b.html">
        Typedef eCAL::ServerEventCallbackT
       </a>
      </li>
@@ -1761,7 +1822,7 @@
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1a86878088e2aad452b6881ccfe5ab8cd2.html">
+      <a class="reference internal" href="../_api/typedef_ecal__callback_8h_1acfa9950c8768a6a9a4445c8bb0f6cccf.html">
        Typedef eCAL::SubEventCallbackT
       </a>
      </li>

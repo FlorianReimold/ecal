@@ -4,11 +4,6 @@
 File ecal_util.h
 ================
 
-
-eCAL utility interface 
-
-
-
 .. contents:: Contents
    :local:
    :backlinks: none
