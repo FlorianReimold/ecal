@@ -2,10 +2,7 @@ name: Documentation
 
 on:  
   push:
-    # on push to master and support/* branches
-    branches:
-      - master
-      - support/*
+
   # release:
   #   types:
   #     - released
@@ -25,11 +22,12 @@ jobs:
         # if the branch is a support/ branch, then set the doc_version
         if [[ $branch == support/* ]]; then
           echo "doc_version=$(echo ${branch#support/})" >> $GITHUB_ENV
-        else if [[ $branch == master ]]; then
+          echo "publish_doc=true" >> $GITHUB_ENV
+        elif [[ $branch == master ]]; then
           echo "doc_version=latest" >> $GITHUB_ENV
+          echo "publish_doc=true" >> $GITHUB_ENV
         else
-          echo "Error: Invalid branch"
-          exit 1
+          echo "publish_doc=false" >> $GITHUB_ENV
         fi
 
     - name: Install Dependencies
@@ -114,6 +112,17 @@ jobs:
       run: cmake --build . --parallel --config Release --target documentation_sphinx
       working-directory: ${{ runner.workspace }}/_build
 
+    - name: Zip Documentation
+      run: |
+        cd ${{ runner.workspace }}/_build/doc/html
+        zip -r ${{ runner.workspace }}/_build/doc/html.zip .
+
+    - name: Upload Documentation as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation
+        path: ${{ runner.workspace }}/_build/doc/html.zip
+
     - name: Deploy Documentation
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -121,3 +130,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ runner.workspace }}/_build/doc/html
         destination_dir: ${{ env.doc_version }}
+      if: env.publish_doc == 'true'
