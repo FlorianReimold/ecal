@@ -111,6 +111,7 @@ jobs:
     - name: Build Documentation
       env:
         ECAL_GH_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+        ECAL_DOC_VERSION: ${{ env.doc_version }}
       run: cmake --build . --parallel --config Release --target documentation_sphinx
       working-directory: ${{ runner.workspace }}/_build
 
