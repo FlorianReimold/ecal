@@ -1,18 +1,18 @@
 [
     {
         "name": "development",
-        "version": "v999.0.0",
+        "version": "v999.0",
         "url": "https://florianreimold.github.io/ecal/latest/"
     },
     {
         "name": "v5.13 (stable)",
-        "version": "v5.13.0",
+        "version": "v5.13",
         "url": "https://florianreimold.github.io/ecal/stable/",
         "preferred": true
     },
     {
         "name": "v5.12",
-        "version": "v5.12.0",
+        "version": "v5.12",
         "url": "https://florianreimold.github.io/ecal/v5.12/"
     }
 ]
