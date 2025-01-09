@@ -77,9 +77,9 @@ copyright = u'2023, Continental'
 #author = u'Continental'
 
 # The short X.Y version
-version = u''
+version = u'v5.13.0'
 # The full version, including alpha/beta/rc tags
-release = u''
+release = u'v5.13.0'
 
 
 # -- General configuration ---------------------------------------------------
