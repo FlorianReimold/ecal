@@ -23,8 +23,8 @@ Let's start a sample that creates and calls a service!
 
 * |fa-ubuntu| On Ubuntu start:
 
-  * :file:`ecal_sample_minimal_server_c`
-  * and :file:`ecal_sample_minimal_client_c`
+  * :file:`ecal_sample_mirror_server_c`
+  * and :file:`ecal_sample_mirror_client_c`
 
 .. image:: img/samples_service.png
    :alt: eCAL Service communication
@@ -33,7 +33,7 @@ Let's start a sample that creates and calls a service!
    Right after you started the client, it may print a few errors about the service not being found.
    Available eCAL services are propagated every 500ms, so it will always take a short amount of time until a service is known to exist.
 
-.. _getting_started_services_cloud:
+.. _getting_started_services_network:
 
 Hostname resolution
 ===================
@@ -79,7 +79,7 @@ After the setup, please verify that all of your machines can ping each other.
 Service Sample over network
 ===========================
 
-Now start one :file:`ecal_sample_minimal_server_c` and one :file:`ecal_sample_minimal_client_c`, just as above.
+Now start one :file:`ecal_sample_mirror_server_c` and one :file:`ecal_sample_mirror_client_c`, just as above.
 But on different machines!
 If you configured everything correctly, the client will now call the service on a different machine.
 

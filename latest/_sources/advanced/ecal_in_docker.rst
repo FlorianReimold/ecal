@@ -8,12 +8,6 @@ eCAL in Docker
 
 Here we will show how to deploy eCAL into a docker container, and how to use its image from other containers.
 
-
-.. important::
-   
-   This will work with eCAL 5.10 and up.
-   Older eCAL versions will lack Shared Memory communication when being run in a docker container.
-
 Prerequisite
 ============
 
@@ -27,7 +21,7 @@ Prerequisite
      * `Docker installation failed <https://forums.docker.com/t/cant-install-docker-on-ubuntu-20-04/93058>`_
 
 * Optional: If you want your docker container to talk to eCAL Nodes on other machines:
-  Set up you :ref:`multicast routes <getting_started_cloud_ubuntu_routes>` on the host.
+  Set up you :ref:`multicast routes <getting_started_network_ubuntu_routes>` on the host.
 
 * Optional: If you want to use eCAL on your host to subscribe to data from your docker containers: :ref:`Install eCAL <getting_started_setup_ubuntu>` on the host.
 
@@ -191,11 +185,6 @@ Run the docker containers
 Seamless IPC-Communication across host borders
 ----------------------------------------------
 
-.. important::
-   This will work with eCAL 5.12 and higher.
-   Older versions lack the ability to utilize the ``shm_transport_domain`` in the :file:`ecal.yaml` file, thus it won't work.
-
-
 In eCAL, you are able to set host belonging over network borders by utilizing the :file:`ecal.yaml` configuration file with the same ``shm_transport_domain`` - in the following steps, you will learn how to set this up.
 
 .. note::
@@ -239,7 +228,7 @@ In eCAL, you are able to set host belonging over network borders by utilizing th
 
 #. Configure the Host network
 
-   - eCAL is sending UDP messages to a multicast IP group ``239.0.0.0/24``, further information in :ref:`Getting Started Section <getting_started_cloud_ubuntu_routes>`. 
+   - eCAL is sending UDP messages to a multicast IP group ``239.0.0.0/24``, further information in :ref:`Getting Started Section <getting_started_network_ubuntu_routes>`. 
      The idea is now, to successfully receive those messages from your previously started container on your host.
      For that, you need to add a route to your routing table.
      By typing ``ifconfig`` in your shell, you can identify the right docker network.

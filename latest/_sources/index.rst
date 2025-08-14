@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. include:: include.txt
+.. include:: /include.txt
 
 ========================
 Welcome to Eclipse eCAL™
@@ -18,9 +18,9 @@ To start learning about eCAL, please refer to the :ref:`Getting Started <getting
 
 This chapter will walk you through 
 
-* :ref:`Setting up <getting_started_setup>` and :ref:`configuring eCAL <getting_started_cloud>`
+* :ref:`Setting up <getting_started_setup>` and :ref:`configuring eCAL <getting_started_network>`
 * The :ref:`applications <getting_started_applications>` that come with eCAL
-* Writing your first :ref:`Hello World <getting_started_hello_world>` program 
+* Writing your first :ref:`Hello World <_getting_started_howto_pubsub_string_hello_world>` program 
 
 Learn about how to use and develop with eCAL in our Webinar:
 
@@ -82,11 +82,10 @@ Eclipse eCAL™ is a trademark of the Eclipse Foundation, Inc. and is used with 
    getting_started/introduction
    getting_started/setup
    getting_started/samples
-   getting_started/cloud
+   getting_started/network
    getting_started/services
    getting_started/applications
-   getting_started/development
-   getting_started/development_python
+   getting_started/howto
 
 .. toctree::
    :hidden:
@@ -109,6 +108,7 @@ Eclipse eCAL™ is a trademark of the Eclipse Foundation, Inc. and is used with 
    
    versions/ecal_versions
    Downloads <https://eclipse-ecal.github.io/ecal/releases/>
+   versions/6.0/migration_guide
    advanced/tutorials
    advanced/ecal_internals
    advanced/ros_comparison

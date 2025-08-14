@@ -68,17 +68,17 @@ Functions
 
 - :ref:`exhale_function_namespaceeCAL_1a023307ac7027db8288093a3fc11d15e9`
 
-- :ref:`exhale_function_namespaceeCAL_1a3ba629552c97fe1a7fe08846a2941f6e`
+- :ref:`exhale_function_namespaceeCAL_1ad027f42b3111e3da85cb106f32fc9002`
 
-- :ref:`exhale_function_namespaceeCAL_1a0b257fe51d5220b61b3e6db582804412`
+- :ref:`exhale_function_namespaceeCAL_1ad1aee2f354dcb72366f8cb6754c8b8ea`
 
 - :ref:`exhale_function_namespaceeCAL_1af8f14107926964a1ab750dab13634b39`
 
 - :ref:`exhale_function_namespaceeCAL_1a30834f2dd3dbab8e0734c79b2aaf9bb4`
 
-- :ref:`exhale_function_namespaceeCAL_1a043fea4cd0b2793a63c1de5830bf382c`
-
 - :ref:`exhale_function_namespaceeCAL_1a439b87d67679bce153704bc95d4b30de`
+
+- :ref:`exhale_function_namespaceeCAL_1a043fea4cd0b2793a63c1de5830bf382c`
 
 - :ref:`exhale_function_namespaceeCAL_1a600033b0736069b66b026b5bc39cab35`
 
